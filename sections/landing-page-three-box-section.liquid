@@ -1,0 +1,135 @@
+<div class="three-divs-container">
+  <div class="wrapper">
+      <div class="three-divs-sub">
+         {%- for block in section.blocks -%}
+            <div class="three-div">
+              <img src="{{ block.settings.svg_icon_1 | img_url: 'master' }}" alt="SVG Icon 1">
+              <div>
+                <h2>{{ block.settings.heading_1 }}</h2>
+                <p>{{ block.settings.paragraph_1 }}</p>  
+              </div>
+            </div>
+        {% endfor %}
+      </div>
+  </div>
+</div>
+
+{%- schema -%}
+{
+  "name": "Three Divs Section",
+  "settings": [],
+  "blocks": [
+  {
+    "type": "image",
+    "name": "Slide Images",
+    "settings": [
+      {
+      "type": "image_picker",
+      "label": "SVG Icon 1",
+      "id": "svg_icon_1"
+      },
+      {
+      "type": "text",
+      "label": "Heading 1",
+      "id": "heading_1"
+    },
+    {
+      "type": "textarea",
+      "label": "Paragraph 1",
+      "id": "paragraph_1"
+    }    
+    ]
+  }
+],
+  "presets": [
+    {
+      "name": "Icon & Text",
+      "category": "Custom"
+    }
+  ]
+}
+{%- endschema -%}
+
+<style>
+.three-divs-sub h2,
+.three-divs-sub p{
+  margin: 0;
+}
+  
+.three-divs-sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+}  
+  
+.three-div {
+    background-color: #F1EFE8;
+    width: 31.50%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 5px 15px;
+    min-height: 110px;
+}
+  
+.three-div h2 {
+    font-family: Karla;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #0B0B0B;
+}
+  
+.three-div p {
+    font-family: Karla;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: left;
+    opacity: 62%;
+    color: #0B0B0B;
+}
+
+.three-div img {
+  width: 28px;
+  height: 28px;
+}
+  
+/* @media (max-width: 767px) {  
+  
+.three-divs-sub {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 30px 0;
+}
+  
+.three-div {   
+ width: 100%;
+}
+  
+} */
+@media (max-width: 992px) {  
+  
+.three-divs-sub {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 30px 0;
+}
+  
+.three-div {   
+ width: 100%;
+}
+  
+}
+@media (max-width: 1398px) {  
+.three-div {
+  min-height: 115px;
+}  
+
+  
+}   
+</style>

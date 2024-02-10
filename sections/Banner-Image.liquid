@@ -1,0 +1,1759 @@
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="Banner-Section section-{{ section.id }}-padding color-bg--{{ section.settings.color-scheme }} {% if section.settings.bt-title !=blank %} Overflow-Hidden {% endif %} {% if section.settings.img3 and section.settings.img4 !=blank %} Animated-Banner {% endif %}">
+    <div class="Banner-Box {% if section.settings.show-container %} wrapper {% endif %}">
+
+      <div class="Sect-Content {% if section.settings.rg %} Remove-Padding {% endif %}">
+      {% if section.settings.s-title !=blank %}
+          <div class="Heading Colored-Heading {{ section.settings.t-align2 }}">
+                <h2 class="section-title title {{ section.settings.t-size }}">{{ section.settings.s-title }}</h2>
+          </div>
+      {% endif %}  
+
+      {% if section.settings.s-info !=blank %}
+        <div class="Section-Info Colored-Info {{ section.settings.t-align2 }}">
+          {{ section.settings.s-info }}
+        </div>
+      {% endif %}  
+      </div>
+      <div class="Flex {{ section.settings.f-align }} {{ section.settings.j-align }}">
+        {% if section.settings.img !=blank%}
+          <div class="Image Desktop-Image {% if section.settings.img3 and section.settings.img4 !=blank %} Animate {% endif %}" style="margin-top:40px;">
+            <img src="{{ section.settings.img | img_url:'master' }}">
+            <div class="Overlay Desk-Overlay Desk-Overlay--{{ section.id }} color-bg--{{ section.settings.ov-bg }}"></div>
+            {%- style -%}
+              .Desk-Overlay--{{ section.id }} {
+                opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+              }
+            {%- endstyle -%}
+          </div>
+        {% endif %}
+
+        {% if section.settings.img3 !=blank%}
+          <div class="Image Desktop-Image Animated-Image">
+            <img src="{{ section.settings.img3 | img_url:'master' }}">
+            <div class="Overlay Desk-Animated-Overlay Desk-Animated-Overlay--{{ section.id }} color-bg--{{ section.settings.ov-bg3 }}"></div>
+            {%- style -%}
+              .Desk-Animated-Overlay--{{ section.id }} {
+                opacity: {{ section.settings.image_overlay_opacity3 | divided_by: 100.0 }};
+              }
+            {%- endstyle -%}
+          </div>
+        {% endif %}
+        
+        {% if section.settings.img2 !=blank%}
+          <div class="Image Mobile-Image {% if section.settings.img3 and section.settings.img4 !=blank %} Animate {% endif %}">
+            <img src="{{ section.settings.img2 | img_url:'master' }}">
+            <div class="Overlay Mobile-Overlay Mobile-Overlay--{{ section.id }} color-bg--{{ section.settings.ov-bg2 }}"></div>
+            {%- style -%}
+              .MMobile-Overlay--{{ section.id }} {
+                opacity: {{ section.settings.image_overlay_opacity2 | divided_by: 100.0 }};
+              }
+            {%- endstyle -%}
+          </div>
+        {% endif %}
+
+        {% if section.settings.img4 !=blank%}
+          <div class="Image Mobile-Image Animated-Image">
+            <img src="{{ section.settings.img4 | img_url:'master' }}">
+            <div class="Overlay Mobile-Animated-Overlay Mobile-Animated-Overlay--{{ section.id }} color-bg--{{ section.settings.ov-bg4 }}"></div>
+            {%- style -%}
+              .Mobile-Animated-Overlay--{{ section.id }} {
+                opacity: {{ section.settings.image_overlay_opacity4 | divided_by: 100.0 }};
+              }
+            {%- endstyle -%}
+          </div>
+        {% endif %}        
+
+        <div class="Caption caption-color-bg--{{ section.settings.color-scheme2 }} {{ section.settings.t-align }} {% if section.settings.post %} Unset {% endif %}">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'Subheading'%}
+              <div class="Subheading {% if block.settings.show-shadow %} Subtitle-Shadow {% endif %}">
+                <h5 class="subtitle">{{ block.settings.subtitle }}</h5>
+              </div>
+            {% when 'Heading'%}
+              <div class="Heading {% if block.settings.show-shadow %} Title-Shadow {% endif %} {% if block.settings.show-bg %} Bg-Effect Bg-Effect--{{ forloop.index }} {% endif %}">
+                <h2 class="title {{ block.settings.t-size }}">{{ block.settings.title }}</h2>
+                {% style %}
+                  .Bg-Effect--{{ forloop.index }} h2 {
+                    background-image:url("{{ block.settings.bg-image | img_url:'master' }}");
+                    background-size:cover;
+                    background-repeat:no-repeat;
+                    font-weight: 800;
+                    font-family: var(--FONT-STACK-BODY);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent; 
+                  }
+                {% endstyle %}  
+              </div>
+              {% when 'Heading-Image' %}
+
+              <div class="Heading Heading-Image">
+                <img src="{{ block.settings.h-img | img_url:'master' }}">
+              </div>
+          
+            {% when 'Color-Heading'%}
+              <div class="Heading {% if block.settings.show-shadow %} Title-Shadow {% endif %} {% if block.settings.show-font %} Pare-Font Para-Font--{{ section.id }}--{{ forloop.index }} {% endif %}
+              {% if block.settings.show-font2 %} Pare-Font Para-Font2--{{ section.id }}--{{ forloop.index }} {% endif %}
+                ">
+                <h2 class="title {{ block.settings.t-size }}">{{ block.settings.color-heading }}</h2>
+                {% style %}
+                  .Para-Font--{{ section.id }}--{{ forloop.index }} h2 {
+                    font-weight: 800;
+                    font-family: var(--FONT-STACK-BODY);
+                    margin:40px auto;
+                  }
+
+                  .Para-Font--{{ section.id }}--{{ forloop.index }} h2 p {
+                      margin: 15px auto;
+                  }
+
+                  .Para-Font2--{{ section.id }}--{{ forloop.index }} h2,
+                  .Para-Font2--{{ section.id }}--{{ forloop.index }} h2 p {
+                    font-weight: 700;
+                    font-family: var(--FONT-STACK-BODY);
+                  }
+
+                  .Para-Font2--{{ section.id }}--{{ forloop.index }} h2 p {
+                      margin-top: 2rem;
+                  }
+                {% endstyle %}  
+              </div>  
+            {% when 'Info'%}
+              <div class="Info {% if block.settings.show-shadow %} Info-Shadow {% endif %} {% if block.settings.show-dark %} Info-dark {% endif %} 
+                {% if block.settings.show-light-dark %} Info-lighe-dark {% endif %} {% if block.settings.show-light-dark2 %} Info-lighe-dark2 {% endif %} 
+              {% if block.settings.show-light-dark3 %} Info-lighe-dark3 {% endif %}{{ block.settings.p-size }} 
+              {% if block.settings.show-bg %} Bg-Info Bg-Info--{{ forloop.index }} {% endif %} {% if block.settings.show-gr %} Gradient {% endif %}">
+                {{ block.settings.info }}
+                {% style %}
+                  .Bg-Info--{{ forloop.index }} p  {
+                    background-image:url("{{ block.settings.bg-image | img_url:'master' }}");
+                    background-size:cover;
+                    background-repeat:no-repeat;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent; 
+                  }
+                {% endstyle %}  
+              </div>  
+            {% when 'Button' %}
+            <div class="Banner-Button">
+              <a class="banner-image__btn btn {% if block.settings.show-radius %} btn-radius {% endif %} {{ block.settings.btn-size }} {{ block.settings.btn-scheme }} {% if block.settings.show-icon2 %} btn-down-big-icon {% endif %} {% if block.settings.rotate-icon %} btn-rotate-icon {% endif %}" href="{{ block.settings.btn-link }}">
+                {% if block.settings.show-icon %}
+                  {% render 'icon-arrow-right' %}
+                {% endif %}  
+                {% if block.settings.show-icon2 %}
+                  {% render 'arrow-big' %}
+                {% endif %}  
+                {{ block.settings.btn-label }}
+              </a>
+            </div>          
+            {% endcase %}
+          {% endfor %}  
+
+          {% if section.settings.show-icon %}
+          <div class="Icon-Box Banner-Icon-Box-Desk">
+            <div class="Flex-Box">
+              <div class="First-Box Flex-Box desk-left-box mobile-left-box">
+
+                {% style %}
+                  .desk-left-box {
+                    width:{{ section.settings.width5 }}% !important;
+                  }
+
+                  @media only screen and (max-width:990px) {
+                   .desk-left-box {
+                      width:{{ section.settings.width6 }}% !important;
+                    } 
+                  }
+                {% endstyle %}  
+                
+                  {% for block in section.blocks %}
+                    {% case block.type %}
+                      {% when 'Icon' %}
+                         <div class="Icon-Grid desk--{{ block.settings.width3 }} mobile--{{ block.settings.width4 }} color-bg--{{ block.settings.color-scheme }}">
+                          <div class="Flex-block {{ block.settings.f-align }} {{ block.settings.j-align }} {{ block.settings.t-align }}">
+                            {% if block.settings.ic-img !=blank %}           
+                              <div class="Icon-Image Icon-Image--{{ forloop.index }}">
+                                 <img src="{{ block.settings.ic-img | img_url:'master' }}"> 
+                              </div>
+                            {% endif %}  
+                            {% if block.settings.svg !=blank %}
+                              <div class="Icon-Image Icon-Image--{{ forloop.index }}">
+                                {{ block.settings.svg }}
+                              </div>
+                            {% endif %}  
+                            {% if block.settings.ic-title !=blank %}
+                              <div class="Title Icon-Title--{{ forloop.index }}">
+                              {{ block.settings.ic-title }}
+                              </div>
+                            {% endif %}  
+                            {% if block.settings.ic-ctitle !=blank %}
+                              <div class="Title">
+                              {{ block.settings.ic-ctitle }}
+                              </div>
+                            {% endif %}       
+                            {% if block.settings.svg2 !=blank and block.settings.richtext !=blank %}
+                              <div class="Flex-Title-Icon {{ block.settings.t-aligns }}">
+                                <div class="Svg-Icon">
+                                  {{ block.settings.svg2 }}
+                                </div>
+                                <div class="Icon-Head">
+                                  {{ block.settings.richtext }}
+                                </div>
+                              </div>
+                            {% endif %}  
+                          </div>
+                          
+                         </div>
+                    {% endcase %}
+                  {% endfor %} 
+              </div>
+
+              <div class="Second-Box Flex-Box desk-right-box mobile-right-box">
+
+                {% style %}
+                  .desk-right-box {
+                    width:{{ section.settings.width7 }}% !important;
+                  }
+
+                  @media only screen and (max-width:990px) {
+                   .desk-right-box {
+                      width:{{ section.settings.width8 }}% !important;
+                    } 
+                  }
+                {% endstyle %}  
+                
+                  {% for block in section.blocks %}
+                    {% case block.type %}
+                      {% when 'Icon2' %}
+                         <div class="Icon-Grid desk--{{ block.settings.width3 }} mobile--{{ block.settings.width4 }} color-bg--{{ block.settings.color-scheme }}">
+                          <div class="Flex-block {{ block.settings.f-align }} {{ block.settings.j-align }} {{ block.settings.t-align }}">
+                            {% if block.settings.ic-img !=blank %}
+                              <div class="Icon-Image">
+                                 <img src="{{ block.settings.ic-img | img_url:'master' }}"> 
+                              </div>
+                            {% endif %}  
+                            {% if block.settings.svg !=blank %}
+                              <div class="Icon-Image">
+                                {{ block.settings.svg }}
+                              </div>
+                            {% endif %}  
+                            
+                            {% if block.settings.ic-title !=blank %}
+                              <div class="Title">
+                              {{ block.settings.ic-title }}
+                              </div>
+                            {% endif %}  
+
+                            {% if block.settings.ic-ctitle !=blank %}
+                              <div class="Title">
+                              {{ block.settings.ic-ctitle }}
+                              </div>
+                            {% endif %}                              
+
+                            {% if block.settings.svg2 !=blank and block.settings.richtext !=blank %}
+                              <div class="Flex-Title-Icon {{ block.settings.t-aligns }}">
+                                <div class="Svg-Icon">
+                                  {{ block.settings.svg2 }}
+                                </div>
+                                <div class="Icon-Head">
+                                  {{ block.settings.richtext }}
+                                </div>
+                              </div>
+                            {% endif %} 
+                      
+                          </div>
+                          <div class="icon-grid-step-cont">STEP {{ forloop.index | minus:1 }}</div>
+                         </div>
+                    {% endcase %}
+                  {% endfor %} 
+              </div>              
+              
+            </div>
+          </div>
+          {% endif %}
+
+          {% if section.settings.show-icon %}
+          <div class="Icon-Box Banner-Icon-Box-Mobile">
+            <div class="Flex-Box">
+              <div class="First-Box Flex-Box desk-left-box mobile-left-box">
+
+                {% style %}
+                  .desk-left-box {
+                    width:{{ section.settings.width5 }}% !important;
+                  }
+
+                  @media only screen and (max-width:990px) {
+                   .desk-left-box {
+                      width:{{ section.settings.width6 }}% !important;
+                    } 
+                  }
+                {% endstyle %}  
+                
+                  {% for block in section.blocks %}
+                    {% case block.type %}
+                      {% when 'Icon' %}
+                         <div class="Icon-Grid desk--{{ block.settings.width3 }} mobile--{{ block.settings.width4 }} color-bg--{{ block.settings.color-scheme }}">
+                          <div class="Flex-block {{ block.settings.f-align }} {{ block.settings.j-align }} {{ block.settings.t-align }}">
+                            {% if block.settings.ic-img !=blank %}           
+                              <div class="Icon-Image Icon-Image--{{ forloop.index }}">
+                                 <img src="{{ block.settings.ic-img | img_url:'master' }}"> 
+                              </div>
+                            {% endif %}  
+                            {% if block.settings.svg !=blank %}
+                              <div class="Icon-Image Icon-Image--{{ forloop.index }}">
+                                {{ block.settings.svg }}
+                              </div>
+                            {% endif %}  
+                            {% if block.settings.ic-title !=blank %}
+                              <div class="Title Icon-Title--{{ forloop.index }}">
+                              {{ block.settings.ic-title }}
+                              </div>
+                            {% endif %}  
+                            {% if block.settings.ic-ctitle !=blank %}
+                              <div class="Title">
+                              {{ block.settings.ic-ctitle }}
+                              </div>
+                            {% endif %}       
+                            {% if block.settings.svg2 !=blank and block.settings.richtext !=blank %}
+                              <div class="Flex-Title-Icon {{ block.settings.t-aligns }}">
+                                <div class="Svg-Icon">
+                                  {{ block.settings.svg2 }}
+                                </div>
+                                <div class="Icon-Head">
+                                  {{ block.settings.richtext }}
+                                </div>
+                              </div>
+                            {% endif %}  
+                          </div>
+                         </div>
+                    {% endcase %}
+                  {% endfor %} 
+              </div>
+
+              <div class="Second-Box Flex-Box desk-right-box mobile-right-box">
+
+                {% style %}
+                  .desk-right-box {
+                    width:{{ section.settings.width7 }}% !important;
+                  }
+
+                  @media only screen and (max-width:990px) {
+                   .desk-right-box {
+                      width:{{ section.settings.width8 }}% !important;
+                    } 
+                  }
+                {% endstyle %}  
+                
+                  {% for block in section.blocks %}
+                    {% case block.type %}
+                      {% when 'Icon2' %}
+                         <div class="Icon-Grid desk--{{ block.settings.width3 }} mobile--{{ block.settings.width4 }} color-bg--{{ block.settings.color-scheme }}">
+                          <div class="Flex-block {{ block.settings.f-align }} {{ block.settings.j-align }} {{ block.settings.t-align }}">
+                            {% if block.settings.ic-img !=blank %}
+                              <div class="Icon-Image">
+                                 <img src="{{ block.settings.ic-img | img_url:'master' }}"> 
+                              </div>
+                            {% endif %}  
+                            {% if block.settings.svg !=blank %}
+                              <div class="Icon-Image">
+                                {{ block.settings.svg }}
+                              </div>
+                            {% endif %}  
+                            
+                            {% if block.settings.ic-title !=blank %}
+                              <div class="Title">
+                              {{ block.settings.ic-title }}
+                              </div>
+                            {% endif %}  
+
+                            {% if block.settings.ic-ctitle !=blank %}
+                              <div class="Title">
+                              {{ block.settings.ic-ctitle }}
+                              </div>
+                            {% endif %}                              
+
+                            {% if block.settings.svg2 !=blank and block.settings.richtext !=blank %}
+                              <div class="Flex-Title-Icon {{ block.settings.t-aligns }}">
+                                <div class="Svg-Icon">
+                                  {{ block.settings.svg2 }}
+                                </div>
+                                <div class="Icon-Head">
+                                  {{ block.settings.richtext }}
+                                </div>
+                              </div>
+                            {% endif %} 
+                      
+                          </div>
+                         </div>
+                    {% endcase %}
+                  {% endfor %} 
+              </div>              
+              
+            </div>
+          </div>
+          {% endif %}
+          
+
+          <div class="Bottom-Content">
+
+             {% if section.settings.title1 !=blank %}
+              <div class="Heading {% if section.settings.show-shadow %} Title-Shadow {% endif %}">
+                <h2 class="title {{ section.settings.t-size11 }}">{{ section.settings.title1 }}</h2>
+              </div>
+             {% endif %}
+
+             {% if section.settings.color-headingd !=blank %}
+               
+                <div class="Heading {% if section.settings.show-shadow2 %} Title-Shadow {% endif %} {% if section.settings.show-font %} Pare-Font Para-Font--{{ section.id }} {% endif %}">
+                  <h2 class="title {{ section.settings.t-size21 }}">{{ section.settings.color-headingd }}</h2>
+                  {% style %}
+                    .Para-Font--{{ section.id }}} h2 {
+                      font-weight: 800;
+                      font-family: var(--FONT-STACK-BODY);
+                      margin:40px auto;
+                    }
+  
+                    .Para-Font--{{ section.id }} h2 p {
+                        margin: 15px auto;
+                    }
+                    
+                  {% endstyle %}  
+                </div>
+           
+              {% endif %} 
+
+              {% if section.settings.info1 !=blank %} 
+         
+                <div class="Info {% if section.settings.show-shadow3 %} Info-Shadow {% endif %} {% if section.settings.show-dark %} Info-dark {% endif %} {{ section.settings.p-size }} {% if section.settings.show-bg %} Bg-Info Bg-Info--{{ section.id }} {% endif %}">
+                  {{ section.settings.info1 }}
+                  {% style %}
+                    .Bg-Info--{{ section.id }} p  {
+                      background-image:url("{{ block.settings.bg-image | img_url:'master' }}");
+                      background-size:cover;
+                      background-repeat:no-repeat;
+                      
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent; 
+                    }
+                  {% endstyle %}  
+                </div> 
+           
+              {% endif %}  
+
+              {% if section.settings.color-headingd2 !=blank %}
+               
+                <div class="Heading {% if section.settings.show-shadow4 %} Title-Shadow {% endif %} {% if section.settings.show-font2 %} Pare-Font Para-Font--{{ section.id }} {% endif %}">
+                  <h2 class="title {{ section.settings.t-size3 }}">{{ section.settings.color-headingd2 }}</h2>
+                  {% style %}
+                    .Para-Font--{{ section.id }}} h2 {
+                      font-weight: 800;
+                      font-family: var(--FONT-STACK-BODY);
+                      margin:40px auto;
+                    }
+  
+                    .Para-Font--{{ section.id }} h2 p {
+                        margin: 15px auto;
+                    }
+                    
+                  {% endstyle %}  
+                </div>
+           
+              {% endif %} 
+            
+        
+         </div>
+      
+        </div>
+
+          {% if section.settings.show-icon2 %}      
+
+            <div class="Icon-Text-Section color-bg--{{ section.settings.color-scheme3 }}">
+                <div class="Flex">
+                  {% for block in section.blocks %}
+                    {% case block.type %}
+                      {% when 'Icon3' %}
+
+                       <div class="Icon-Boxed color-bg--{{ block.settings.color-scheme }} desk--{{ block.settings.width3 }} mobile--{{ block.settings.width4 }}">
+                          <div class="Flex-Box {{ block.settings.f-align }} {{ block.settings.j-align }} {{ block.settings.t-align }}">
+
+                            {% if block.settings.img !=blank %}
+                              <div class="Image">
+                                <img src="{{ block.settings.img | img_url:'master' }}"">
+                              </div>
+                            {% endif %}  
+                            
+                            {% if block.settings.svg !=blank %}
+                              <div class="Image">
+                                {{ block.settings.svg }}
+                              </div>
+                            {% endif %}  
+
+                            <div class="Info">
+
+                              {% if block.settings.title !=blank %}
+                                <div class="Title">
+                                   <h4>{{ block.settings.title }}</h4> 
+                                </div>
+                              {% endif %}  
+  
+                              {% if block.settings.info !=blank %}
+                                <div class="Description">
+                                  {{ block.settings.info }}
+                                </div>
+                              {% endif %}  
+
+                            </div>
+                          </div>
+                       </div>
+                  
+                    {% endcase %}
+                  {% endfor %}  
+                </div>
+            </div>
+
+          {% endif %}  
+
+
+
+
+
+
+        
+          {% if section.settings.bt-title !=blank %}
+            <div class="Bottom-Title">
+               <h1 class="bt-title h0">{{ section.settings.bt-title }}</h1> 
+            </div>
+          {% endif %}       
+              
+        
+      </div>
+    </div>
+</div>  
+
+{% schema %}
+  {
+    "name": "Banner-Image",
+    "class":"Shopify-Banner-Image",
+    "settings": [
+
+      {
+        "type": "select",
+        "id": "color-scheme",
+        "options": [
+          { "value": "white", "label": "White"},
+          { "value": "dark", "label": "Dark"},
+          { "value": "dark2", "label": "Dark2"},
+          { "value": "accent", "label": "Accent"},
+          { "value": "transparent", "label": "Transparent"},
+          { "value": "accent3", "label": "Accent3"},
+          { "value": "accent5", "label": "Accent5"}
+        ],
+             "label": "Section Color Scheme"
+      },
+      {
+        "type": "checkbox",
+        "id": "show-container",
+        "label": "Show Container",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "color-scheme2",
+        "options": [
+          { "value": "white", "label": "White"},
+          { "value": "dark", "label": "Dark"},
+          { "value": "accent", "label": "Accent"},
+          { "value": "dark2", "label": "Dark2"},
+          { "value": "transparent", "label": "Transparent"},
+          { "value": "transparent2", "label": "Transparent2"},
+          { "value": "accent4", "label": "Accent4"},
+          { "value": "accent3", "label": "Accent3"},
+          { "value": "accent5", "label": "Accent5"}
+        ],
+             "label": "Caption Box Color Scheme"
+      },   
+      {
+        "type": "checkbox",
+        "id": "post",
+        "label": "Remove Caption Position Over The Image",
+        "default": false
+      },      
+      {
+        "type": "select",
+        "id": "t-align2",
+        "options": [
+          { "value": "text-center", "label": "Text-Center"},
+          { "value": "text-left", "label": "Text-Left"},
+          { "value": "text-right", "label": "Text-Right"}
+        ],
+        "label": "Section Title Alignment",
+		"default":"text-center"
+      },      
+      {
+		"type": "html",
+		"id": "s-title",
+		"default": "<p>By choosing Make to order, We take a step against unnecessary textile waste.Which Helps to save the planet.</p>",
+		"label": "Section Colored Heading"
+	  },
+      {
+		"type": "richtext",
+		"id": "s-info",
+		"default": "<p>you're stopping those extra outfits from becoming trash. It's like giving a second chance to clothes and saving the Earth's resources at the same time.</p>",
+		"label": "Section Colored Info"
+	  },   
+      {
+        "type": "checkbox",
+        "id": "rg",
+        "label": "Remove Padding",
+        "default": false,
+        "info":"If Section Title Or Info is blank thene check this checkbox to remove unnecessary padding From Section Title"
+      },      
+      {
+        "type": "select",
+        "id": "t-size",
+        "options": [
+          {
+            "value": "h3",
+            "label": "Small"
+          },
+          {
+            "value": "h2",
+            "label": "Medium"
+          },
+          {
+            "value": "h1",
+            "label": "Large"
+          },
+          {
+            "value": "h0",
+            "label": "Extra Large"
+          }
+        ],
+        "default": "h2",
+        "label": "Title Font Size"
+      },      
+	  {
+        "id": "img",
+        "type": "image_picker",
+        "label": "Desktop Banner"
+      }, 
+      {
+        "type": "range",
+        "id": "image_overlay_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "%",
+        "label": "Darken The Dekstop Banner",
+        "default": 30
+      },    
+      {
+        "type": "select",
+        "id": "ov-bg",
+        "options": [
+          { "value": "white", "label": "White"},
+          { "value": "dark", "label": "Dark"},
+          { "value": "accent", "label": "Accent"},
+          { "value": "transparent", "label": "Transparent"}
+        ],
+             "label": "Desktop Section Image Overlay Color Scheme"
+      },      
+	  {
+        "id": "img2",
+        "type": "image_picker",
+        "label": "Mobile Banner"
+      },  
+      {
+        "type": "range",
+        "id": "image_overlay_opacity2",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "%",
+        "label": "Darken The Mobile Banner",
+        "default": 30
+      },  
+
+
+
+	  {
+        "id": "img3",
+        "type": "image_picker",
+        "label": "Desktop Animated Banner"
+      }, 
+      {
+        "type": "range",
+        "id": "image_overlay_opacity3",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "%",
+        "label": "Darken The Dekstop Animated Banner",
+        "default": 0
+      },    
+      {
+        "type": "select",
+        "id": "ov-bg3",
+        "options": [
+          { "value": "white", "label": "White"},
+          { "value": "dark", "label": "Dark"},
+          { "value": "accent", "label": "Accent"},
+          { "value": "transparent", "label": "Transparent"}
+        ],
+             "label": "Desktop Section Animated Image Overlay Color Scheme"
+      },      
+	  {
+        "id": "img4",
+        "type": "image_picker",
+        "label": "Mobile Animated Banner"
+      },  
+      {
+        "type": "range",
+        "id": "image_overlay_opacity4",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "%",
+        "label": "Darken The Mobile Animated Banner",
+        "default": 30
+      }, 
+      
+      {
+        "type": "select",
+        "id": "ov-bg4",
+        "options": [
+          { "value": "white", "label": "White"},
+          { "value": "dark", "label": "Dark"},
+          { "value": "accent", "label": "Accent"},
+          { "value": "transparent", "label": "Transparent"}
+        ],
+             "label": "Mobile Section Animated Image Overlay Color Scheme"
+      },      
+      {
+        "type": "select",
+        "id": "f-align",
+        "options": [
+          { "value": "align-start", "label": "Align-Start"},
+          { "value": "align-center", "label": "Align-Center"},
+          { "value": "align-end", "label": "Align-End"}
+        ],
+          "label": "Caption Box Vertical Alignment"
+      },        
+      {
+        "type": "select",
+        "id": "j-align",
+        "options": [
+          { "value": "start", "label": "Start"},
+          { "value": "middle", "label": "Middle"},
+          { "value": "end", "label": "End"}
+        ],
+        "label": "Caption Box Horizontal Alignment"
+      },
+      {
+        "type": "select",
+        "id": "t-align",
+        "options": [
+          { "value": "text-center", "label": "Text-Center"},
+          { "value": "text-left", "label": "Text-Left"},
+          { "value": "text-right", "label": "Text-Right"}
+        ],
+        "label": "Caption Box Text Alignment",
+		"default":"text-center"
+      },      
+      {
+        "type": "checkbox",
+        "id": "show-icon",
+        "label": "Show Icon Text Section",
+        "default": false
+      },  
+
+      {
+        "type": "checkbox",
+        "id": "show-icon2",
+        "label": "Show Simple Icon Text Section",
+        "default": false
+      },       
+      {
+        "type": "select",
+        "id": "color-scheme3",
+        "options": [
+          { "value": "white", "label": "White"},
+          { "value": "dark", "label": "Dark"},
+          { "value": "accent", "label": "Accent"},
+          { "value": "transparent", "label": "Transparent"},
+          { "value": "accent3", "label": "Accent3"}
+        ],
+             "label": "Simple Icon Text Section Color Scheme"
+      },
+      
+	  {
+		"type":      "range",
+		"id":        "width5",
+		"min":       0,
+		"max":        100,
+		"step":       1,
+		"unit":       "%",
+		"label":     "Desktop Left Box Icon Text Box Width",
+		"default":   24
+	  },
+
+	  {
+		"type":      "range",
+		"id":        "width6",
+		"min":       0,
+		"max":        100,
+		"step":       1,
+		"unit":       "%",
+		"label":     "Mobile Left Box Icon Text Box Width",
+		"default":   100
+	  },
+
+	  {
+		"type":      "range",
+		"id":        "width7",
+		"min":       0,
+		"max":        100,
+		"step":       1,
+		"unit":       "%",
+		"label":     "Desktop Right Box Icon Text Box Width",
+		"default":   75
+	  },
+
+	  {
+		"type":      "range",
+		"id":        "width8",
+		"min":       0,
+		"max":        100,
+		"step":       1,
+		"unit":       "%",
+		"label":     "Mobile Right Box Icon Text Box Width",
+		"default":   100
+	  },
+
+
+
+			{
+				"type": "checkbox",
+				"id": "show-shadow",
+				"label": "Show Text Stroke Effect",
+				"default": false
+			},
+  
+       
+			{
+				"type": "text",
+				"id": "title1",
+				"label": "Bottom Content Box Heading"
+			},
+            {
+              "type": "select",
+              "id": "t-size11",
+              "options": [
+                {
+                  "value": "h3",
+                  "label": "Small"
+                },
+                {
+                  "value": "h2",
+                  "label": "Medium"
+                },
+                {
+                  "value": "h1",
+                  "label": "Large"
+                },
+                {
+                  "value": "h0",
+                  "label": "Extra Large"
+                }
+              ],
+              "default": "h2",
+              "label": "Bottom Content Box Title Font Size"
+            },
+			
+
+
+
+			{
+				"type": "checkbox",
+				"id": "show-shadow2",
+				"label": "Show Bottom Content Box Color Title Text Stroke Effect",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show-font",
+				"label": "Show Bottom Content Box Para Font In Title",
+				"default": false
+			},          
+			{
+				"type": "html",
+				"id": "color-headingd",
+				"label": "Bottom Content Box Colored Heading"
+			},
+            {
+              "type": "select",
+              "id": "t-size21",
+              "options": [
+                {
+                  "value": "h3",
+                  "label": "Small"
+                },
+                {
+                  "value": "h2",
+                  "label": "Medium"
+                },
+                {
+                  "value": "h1",
+                  "label": "Large"
+                },
+                {
+                  "value": "h0",
+                  "label": "Extra Large"
+                }
+              ],
+              "default": "h2",
+              "label": "Bottom Content Box Colored Title Font Size"
+            },
+
+
+
+
+
+			{
+				"type": "checkbox",
+				"id": "show-shadow4",
+				"label": "Show Bottom Content Second Box Color Title Text Stroke Effect",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show-font2",
+				"label": "Show Bottom Content Second Box Para Font In Title",
+				"default": false
+			},          
+			{
+				"type": "html",
+				"id": "color-headingd2",
+				"label": "Bottom Content Box Second Colored Heading"
+			},
+            {
+              "type": "select",
+              "id": "t-size3",
+              "options": [
+                {
+                  "value": "h3",
+                  "label": "Small"
+                },
+                {
+                  "value": "h2",
+                  "label": "Medium"
+                },
+                {
+                  "value": "h1",
+                  "label": "Large"
+                },
+                {
+                  "value": "h0",
+                  "label": "Extra Large"
+                }
+              ],
+              "default": "h2",
+              "label": "Bottom Content Box Title Second Font Size"
+            },
+
+
+			{
+				"type": "checkbox",
+				"id": "show-shadow3",
+				"label": "Show Bottom Content Box Text Stroke Effect",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show-bg",
+				"label": "Show Bottom Content Box Bg Image Effect In Title",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show-dark",
+				"label": "Show Bottom Content Box Dark Text",
+				"default": false
+			},            
+    		{
+              "id": "bg-image",
+              "type": "image_picker",
+              "label": "Bottom Content Box Title Bg Image"
+          	},           
+			{
+				"type": "richtext",
+				"id": "info1",
+				"label": "Bottom Content Box Description"
+			},
+            {
+              "type": "select",
+              "id": "p-size",
+              "options": [
+                {
+                  "value": "ex-small",
+                  "label": "Extra Small"
+                },                
+                {
+                  "value": "small",
+                  "label": "Small"
+                },
+                {
+                  "value": "medium",
+                  "label": "Medium"
+                },
+                {
+                  "value": "extra-small",
+                  "label": "Extra-Small"
+                }                
+              ],
+              "default": "medium",
+              "label": "Bottom Content Box Info Font Size"
+            },  			
+
+
+      
+      
+      {
+		"type": "text",
+		"id": "bt-title",
+		"default": "Make To Order",
+		"label": "Section Bottom Heading"
+	  },      
+      {
+          "type": "range",
+          "id": "padding_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Section Top Padding",
+          "default": 36
+      },
+      {
+          "type": "range",
+          "id": "padding_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Section Bottom Padding",
+          "default": 36
+      } 
+      
+    ],
+
+	"blocks": [
+      {
+        "type": "Subheading",
+        "name": "Subtitle",
+        "settings": [
+
+
+			{
+				"type": "checkbox",
+				"id": "show-shadow",
+				"label": "Show Text Stroke Effect",
+				"default": false
+			},
+			{
+				"type": "text",
+				"id": "subtitle",
+				"default": "Subtitle",
+				"label": "Subheading"
+			}
+
+
+
+        ]
+      },
+      {
+        "type": "Heading",
+        "name": "Title",
+        "settings": [
+
+
+			{
+				"type": "checkbox",
+				"id": "show-shadow",
+				"label": "Show Text Stroke Effect",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show-bg",
+				"label": "Show Bg Image Effect In Title",
+				"default": false
+			},      
+    		{
+              "id": "bg-image",
+              "type": "image_picker",
+              "label": "Title Bg Image"
+          	},          
+			{
+				"type": "text",
+				"id": "title",
+				"default": "TO STOP THIS",
+				"label": "Heading"
+			},
+            {
+              "type": "select",
+              "id": "t-size",
+              "options": [
+                {
+                  "value": "h3",
+                  "label": "Small"
+                },
+                {
+                  "value": "h2",
+                  "label": "Medium"
+                },
+                {
+                  "value": "h1",
+                  "label": "Large"
+                },
+                {
+                  "value": "h0",
+                  "label": "Extra Large"
+                }
+              ],
+              "default": "h2",
+              "label": "Title Font Size"
+            }
+
+
+        ]
+      },
+      {
+        "type": "Heading-Image",
+        "name": "Title Image",
+        "settings": [
+    
+    		{
+              "id": "h-img",
+              "type": "image_picker",
+              "label": "Title  Image"
+          	}
+
+
+        ]
+      },
+
+      {
+        "type": "Color-Heading",
+        "name": "Color-Title",
+        "settings": [
+
+
+			{
+				"type": "checkbox",
+				"id": "show-shadow",
+				"label": "Show Text Stroke Effect",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show-font",
+				"label": "Show Para Font In Title",
+				"default": false
+			},   
+			{
+				"type": "checkbox",
+				"id": "show-font2",
+				"label": "Show Para Font In Title Without Gap",
+				"default": false
+			},           
+			{
+				"type": "html",
+				"id": "color-heading",
+				"default": "<p>Write Colored Heading Here</p>",
+				"label": "Colored Heading"
+			},
+            {
+              "type": "select",
+              "id": "t-size",
+              "options": [
+                {
+                  "value": "h3",
+                  "label": "Small"
+                },
+                {
+                  "value": "h2",
+                  "label": "Medium"
+                },
+                {
+                  "value": "h1",
+                  "label": "Large"
+                },
+                {
+                  "value": "h0",
+                  "label": "Extra Large"
+                }
+              ],
+              "default": "h2",
+              "label": "Title Font Size"
+            }
+
+
+        ]
+      },
+      
+      {
+        "type": "Info",
+        "name": "Info Block",
+        "settings": [
+
+
+			{
+				"type": "checkbox",
+				"id": "show-shadow",
+				"label": "Show Text Stroke Effect",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show-bg",
+				"label": "Show Bg Image Effect In Title",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show-dark",
+				"label": "Show Dark Text",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show-light-dark",
+				"label": "Show Light Dark Text",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show-light-dark2",
+				"label": "Show Second Light Dark Text",
+				"default": false
+			}, 
+			{
+				"type": "checkbox",
+				"id": "show-light-dark3",
+				"label": "Show Third Light Dark Text",
+				"default": false
+			},           
+			{
+				"type": "checkbox",
+				"id": "show-gr",
+				"label": "Show Gradient Effect",
+				"default": false
+			},          
+    		{
+              "id": "bg-image",
+              "type": "image_picker",
+              "label": "Title Bg Image"
+          	},           
+			{
+				"type": "richtext",
+				"id": "info",
+				"default": "<p>Write here some description</p>",
+				"label": "Description"
+			},
+            {
+              "type": "select",
+              "id": "p-size",
+              "options": [
+                {
+                  "value": "small",
+                  "label": "Small"
+                },
+                {
+                  "value": "medium",
+                  "label": "Medium"
+                },
+                {
+                  "value": "extra-small",
+                  "label": "Extra-Small"
+                }                
+              ],
+              "default": "medium",
+              "label": "Info Font Size"
+            }          
+
+
+
+        ]
+      },	
+
+      {
+        "type": "Button",
+        "name": "Button",
+        "settings": [
+
+
+          {
+            "type": "select",
+            "id": "btn-scheme",
+            "label": "Button Scheme",
+            "default": "btn--white",
+            "options": [
+              { "label": "Primary", "value": "btn--primary" },
+              { "label": "Secondary", "value": "btn--secondary" },
+              { "label": "White", "value": "btn--white" },
+              { "label": "Black", "value": "btn--black" },
+			  { "label": "Solid", "value": "btn--solid" },
+              { "label": "Accent", "value": "btn-accent"}
+            ]
+          },
+		  {
+				"type": "checkbox",
+				"id": "show-radius",
+				"label": "Show button radius",
+				"default": false
+		  }, 
+		  {
+				"type": "checkbox",
+				"id": "show-icon",
+				"label": "Show button arrow icon",
+				"default": false
+		  }, 
+		  {
+				"type": "checkbox",
+				"id": "show-icon2",
+				"label": "Show button dwon big arrow icon",
+				"default": false
+		  },           
+		  {
+				"type": "checkbox",
+				"id": "rotate-icon",
+				"label": "Show button arrow icon rotate",
+				"default": false
+		  },              
+          {
+            "type": "select",
+            "id": "btn-size",
+            "label": "Size",
+            "default": "btn--small",
+            "options": [
+              { "label": "Large", "value": "btn--large" },
+              { "label": "Medium", "value": "btn--medium" },
+              { "label": "Small", "value": "btn--small" }
+            ]
+          },
+          {
+            "id": "btn-link",
+            "type": "url",
+            "label": "Button Link"
+          },
+          {
+            "id": "btn-label",
+            "type": "text",
+            "label": "Button Label",
+            "default": "Shop Now"
+          }			  
+		  
+
+
+        ]
+      },
+
+      {
+        "type": "Icon",
+        "name": "Left Box Icon Text Box",
+        "settings": [
+            {
+              "type": "select",
+              "id": "color-scheme",
+              "options": [
+                { "value": "white", "label": "White"},
+                { "value": "white2", "label": "White2"},
+                { "value": "dark", "label": "Dark"},
+                { "value": "accent", "label": "Accent"},
+                { "value": "transparent", "label": "Transparent"},
+                { "value": "accent2", "label": "Accent2"}
+              ],
+                   "label": "Icon Text Grid Color Scheme"
+            },          
+			{
+				 "type": "select",
+				 "id": "width3",
+				 "options": [
+                    { "value": "27", "label": "27%"}, 
+					{ "value": "24", "label": "Four In A Row"},
+					{ "value": "32", "label": "Thre In A Row"},
+					{ "value": "49", "label": "Two In A Row"},
+					{ "value": "100", "label": "One In A Row"}
+				 ],
+				 "label": "Desktop Icon Text Grid Width",
+				 "default":"32"
+			},
+			{
+				 "type": "select",
+				 "id": "width4",
+				 "options": [
+                    { "value": "27", "label": "27%"}, 
+					{ "value": "24", "label": "Four In A Row"},
+					{ "value": "32", "label": "Thre In A Row"},
+					{ "value": "49", "label": "Two In A Row"},
+					{ "value": "100", "label": "One In A Row"}
+				 ],
+				 "label": "Mobile Icon Text Grid Width",
+				 "default":"100"
+			},			
+			{
+				"type": "select",
+				"id": "f-align",
+				"options": [
+				  { "value": "align-start", "label": "Align-Start"},
+				  { "value": "align-center", "label": "Align-Center"},
+				  { "value": "align-end", "label": "Align-End"}
+				],
+				  "label": "Icon Text Grid Vertical Alignment"
+			},        
+			{
+				"type": "select",
+				"id": "j-align",
+				"options": [
+				  { "value": "start", "label": "Start"},
+				  { "value": "middle", "label": "Middle"},
+				  { "value": "end", "label": "End"}
+				],
+				"label": "Icon Text Grid Horizontal Alignment"
+			},
+            {
+              "type": "select",
+              "id": "t-align",
+              "options": [
+                { "value": "text-center", "label": "Text-Center"},
+                { "value": "text-left", "label": "Text-Left"},
+                { "value": "text-right", "label": "Text-Right"}
+              ],
+              "label": "Icon Text Grid Text Alignment",
+      		"default":"text-center"
+            },           
+			{
+			  "id": "ic-img",
+			  "type": "image_picker",
+			  "label": "Icon Image",
+			  "info": "Use images in (Jpg,Png Format)"
+			},
+			{
+				"type": "html",
+				"id": "svg",
+				"default": "<p>Write Svg Icon Code Here</p>",
+				"label": "Svg Icon Code Box"
+			},			
+			{
+				"type": "richtext",
+				"id": "ic-title",
+				"default": "<p>Icon Text Title</p>",
+				"label": "Icon Text Heading"
+			},
+			{
+				"type": "html",
+				"id": "ic-ctitle",
+				"default": "<p>Icon Text Colored Title</p>",
+				"label": "Icon Text Colored Heading"
+			},          
+ 			{
+				"type": "html",
+				"id": "svg2",
+				"default": "<p>Write Svg Icon Code Here</p>",
+				"label": "Second Svg Icon Code Box"
+			},			
+			{
+				"type": "richtext",
+				"id": "richtext",
+				"default": "<p>Icon With Text Title</p>",
+				"label": "Icon With Text Heading"
+			},
+            {
+              "type": "select",
+              "id": "t-aligns",
+              "options": [
+                { "value": "text-center", "label": "Text-Center"},
+                { "value": "text-left", "label": "Text-Left"},
+                { "value": "text-right", "label": "Text-Right"}
+              ],
+              "label": "Flex Icon Text Box Text Alignment",
+      		"default":"text-left"
+            }           
+
+
+
+        ]
+      },
+
+      {
+        "type": "Icon2",
+        "name": "Right Box Icon Text Box",
+        "settings": [
+            {
+              "type": "select",
+              "id": "color-scheme",
+              "options": [
+                { "value": "white", "label": "White"},
+                { "value": "white2", "label": "White2"},
+                { "value": "dark", "label": "Dark"},
+                { "value": "accent", "label": "Accent"},
+                { "value": "transparent", "label": "Transparent"},
+                { "value": "accent2", "label": "Accent2"}
+              ],
+                   "label": "Icon Text Grid Color Scheme"
+            },          
+			{
+				 "type": "select",
+				 "id": "width3",
+				 "options": [
+					{ "value": "27", "label": "27%"}, 
+					{ "value": "24", "label": "Four In A Row"},
+					{ "value": "32", "label": "Thre In A Row"},
+					{ "value": "49", "label": "Two In A Row"},
+					{ "value": "100", "label": "One In A Row"}
+				 ],
+				 "label": "Desktop Icon Text Grid Width",
+				 "default":"32"
+			},
+			{
+				 "type": "select",
+				 "id": "width4",
+				 "options": [
+					{ "value": "27", "label": "27%"}, 
+					{ "value": "24", "label": "Four In A Row"},
+					{ "value": "32", "label": "Thre In A Row"},
+					{ "value": "49", "label": "Two In A Row"},
+					{ "value": "100", "label": "One In A Row"}
+				 ],
+				 "label": "Mobile Icon Text Grid Width",
+				 "default":"100"
+			},			
+			{
+				"type": "select",
+				"id": "f-align",
+				"options": [
+				  { "value": "align-start", "label": "Align-Start"},
+				  { "value": "align-center", "label": "Align-Center"},
+				  { "value": "align-end", "label": "Align-End"}
+				],
+				  "label": "Icon Text Grid Vertical Alignment"
+			},        
+			{
+				"type": "select",
+				"id": "j-align",
+				"options": [
+				  { "value": "start", "label": "Start"},
+				  { "value": "middle", "label": "Middle"},
+				  { "value": "end", "label": "End"}
+				],
+				"label": "Icon Text Grid Horizontal Alignment"
+			},
+            {
+              "type": "select",
+              "id": "t-align",
+              "options": [
+                { "value": "text-center", "label": "Text-Center"},
+                { "value": "text-left", "label": "Text-Left"},
+                { "value": "text-right", "label": "Text-Right"}
+              ],
+              "label": "Icon Text Grid Text Alignment",
+        	  "default":"text-left"
+            },           
+			{
+			  "id": "ic-img",
+			  "type": "image_picker",
+			  "label": "Icon Image",
+			  "info": "Use images in (Jpg,Png Format)"
+			},
+			{
+				"type": "html",
+				"id": "svg",
+				"default": "<p>Write Svg Icon Code Here</p>",
+				"label": "Svg Icon Code Box"
+			},			
+			{
+				"type": "richtext",
+				"id": "ic-title",
+				"default": "<p>Icon Text Title</p>",
+				"label": "Icon Text Heading"
+			},
+			{
+				"type": "html",
+				"id": "ic-ctitle",
+				"default": "<p>Icon Text Colored Title</p>",
+				"label": "Icon Text Colored Heading"
+			},          
+ 			{
+				"type": "html",
+				"id": "svg2",
+				"default": "<p>Write Svg Icon Code Here</p>",
+				"label": "Second Svg Icon Code Box"
+			},			
+			{
+				"type": "richtext",
+				"id": "richtext",
+				"default": "<p>Icon With Text Title</p>",
+				"label": "Icon With Text Heading"
+			},
+            {
+              "type": "select",
+              "id": "t-aligns",
+              "options": [
+                { "value": "text-center", "label": "Text-Center"},
+                { "value": "text-left", "label": "Text-Left"},
+                { "value": "text-right", "label": "Text-Right"}
+              ],
+              "label": "Flex Icon Text Box Text Alignment",
+      		"default":"text-left"
+            }          
+
+
+
+        ]
+      },
+
+
+
+
+
+
+
+      {
+        "type": "Icon3",
+        "name": "Simple Icon Text Grid",
+        "settings": [
+
+
+            {
+              "type": "select",
+              "id": "color-scheme",
+              "options": [
+                { "value": "white", "label": "White"},
+                { "value": "dark", "label": "Dark"},
+                { "value": "accent", "label": "Accent"},
+                { "value": "transparent", "label": "Transparent"},
+                { "value": "accent2", "label": "Accent2"},
+                { "value": "accent3", "label": "Accent3"}
+              ],
+                   "label": "Simple Icon Text Grid Color Scheme"
+            },            
+			{
+				 "type": "select",
+				 "id": "width3",
+				 "options": [
+					{ "value": "27", "label": "27%"}, 
+					{ "value": "24", "label": "Four In A Row"},
+					{ "value": "32", "label": "Thre In A Row"},
+					{ "value": "49", "label": "Two In A Row"},
+					{ "value": "100", "label": "One In A Row"}
+				 ],
+				 "label": "Desktop Simple Icon Text Grid Width",
+				 "default":"32"
+			},
+			{
+				 "type": "select",
+				 "id": "width4",
+				 "options": [
+					{ "value": "27", "label": "27%"}, 
+					{ "value": "24", "label": "Four In A Row"},
+					{ "value": "32", "label": "Thre In A Row"},
+					{ "value": "49", "label": "Two In A Row"},
+					{ "value": "100", "label": "One In A Row"}
+				 ],
+				 "label": "Mobile Simple Icon Text Grid Width",
+				 "default":"100"
+			},			
+			{
+				"type": "select",
+				"id": "f-align",
+				"options": [
+				  { "value": "align-start", "label": "Align-Start"},
+				  { "value": "align-center", "label": "Align-Center"},
+				  { "value": "align-end", "label": "Align-End"}
+				],
+				  "label": "Simple Icon Text Grid Vertical Alignment"
+			},        
+			{
+				"type": "select",
+				"id": "j-align",
+				"options": [
+				  { "value": "start", "label": "Start"},
+				  { "value": "middle", "label": "Middle"},
+				  { "value": "end", "label": "End"}
+				],
+				"label": "Simple Icon Text Grid Horizontal Alignment"
+			},
+			{
+				 "type": "select",
+				 "id": "t-align",
+				 "options": [
+					{ "value": "text-center", "label": "Text-Center"},
+					{ "value": "text-left", "label": "Text-Left"},
+					{ "value": "text-right", "label": "Text-Right"}
+				 ],
+				 "label": "Simple Icon Text Grid Text Alignment",
+				 "default":"text-left"
+			},          
+			{
+			  "id": "img",
+			  "type": "image_picker",
+			  "label": "Icon Image",
+			  "info": "Use images in (Jpg,Png Format)"
+			},
+			{
+				"type": "html",
+				"id": "svg",
+				"default": "<p>Write Svg Icon Code Here</p>",
+				"label": "Svg Icon Code Box"
+			},			
+			{
+				"type": "text",
+				"id": "title",
+				"default": "Icon Text Title",
+				"label": "Simple Icon Text Heading"
+			},
+			{
+				"type": "richtext",
+				"id": "info",
+				"default": "<p>Simple Icon Text Description</p>",
+				"label": "Simple Icon Text Info"
+			}
+
+        ]
+      }
+      
+      
+      
+    ],
+
+ 	
+	"presets": [
+		{
+		  "name": "Banner-Image"
+		}
+	]   
+    
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

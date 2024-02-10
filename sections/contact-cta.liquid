@@ -1,0 +1,284 @@
+
+<style>
+  .contact-cont{
+    margin: 70px auto;
+    background:#F1EFE8;
+    padding: 77px 120px;
+    display:flex;justify-content:space-between;
+    max-width: 1300px;
+    transition: 0.25s linear;
+  }
+  .contact-cont:hover{
+    background:transparent;
+    box-shadow: 5px 5px 15px #d1d1d1;
+    border: 1px black solid;
+  }
+  .link-txt{
+    text-decoration-line: underline;
+    font-weight: 800;font-style: italic;
+  }
+  .green-check{
+    border-radius: 26.083px;
+    background: #22C807;
+    padding: 0px 5px;
+  }
+  .contact-cont .arrow{
+    transform-origin: top left;
+    transform: rotate(-10.997deg);
+    transition: 0.25s linear;
+  }
+  .contact-cont .arrow.rotate{
+    transform: rotate(3deg);
+  }
+  .contact-btn{
+    padding:12px 45px;
+    cursor:pointer;
+  }
+  .features-point-list{
+    display:flex;flex-wrap: wrap;gap:10px;column-gap: 18px;
+  }
+</style>
+<style>
+  @media screen and (max-width:500px){
+  .features-point-list{
+    flex-direction:column;
+  }
+    .contact-cont{
+      flex-direction:column;
+      padding: 30px 20px;
+      margin: 65px 12px;
+    }
+    .contact-btns-cont{
+      margin-top:20px;
+    }
+    .contact-btn{
+      padding:10px 25px;
+    }
+    .contact-cont .arrow{
+      display:none;
+    }
+  }
+</style>
+
+<div class="contact-cont" style="">
+  <div style="flex: 1;">
+    <h1 class="headline-2">{{ section.settings.headline }}</h1>
+    <p class="para-2">{{ section.settings.para }}</p>
+    <div class="features-point-list">
+      {% for block in section.blocks %}
+        <div style="display:flex;gap:10px;">
+          <span class="green-check">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="11" viewBox="0 0 14 11" fill="none">
+              <path d="M0.951172 5.22181L4.91026 9.1809L12.5956 1.49561" stroke="white" stroke-width="2.32888"/>
+            </svg>
+          </span>
+          <span>{{ block.settings.point }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="arrow" style="margin: auto;margin-right:8px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="276" height="46" viewBox="0 0 276 46" fill="none">
+      <path d="M275.148 34.4657C275.681 33.8317 275.6 32.8855 274.966 32.3522L264.635 23.6614C264.001 23.1281 263.055 23.2097 262.522 23.8436C261.988 24.4776 262.07 25.4238 262.704 25.9571L271.887 33.6822L264.161 42.865C263.628 43.4989 263.71 44.4451 264.344 44.9784C264.978 45.5117 265.924 45.4302 266.457 44.7962L275.148 34.4657ZM1.45679 7.92898C34.5671 -2.64013 66.0771 7.0523 107.957 18.0896C149.739 29.1014 201.376 41.2664 274.129 34.9945L273.871 32.0056C201.625 38.2338 150.379 26.1676 108.721 15.1887C67.1604 4.23535 34.6705 -5.82228 0.544514 5.07105L1.45679 7.92898Z" fill="black"/>
+    </svg>
+  </div>
+  <div class="contact-btns-cont" style="display:flex;flex-direction:column;gap:20px;justify-content: center;">
+    <div class="contact-btn" style="background:black;color:white;">
+      <div>
+        <span>{{ section.settings.cta1_txt }}</span>
+        <svg style="margin-left:15px;" xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+          <path d="M1 1.3125L5.6875 6L1 10.6875" stroke="white" stroke-width="0.9375" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+    <div class="contact-btn whatsapp-cta" style="border:1px solid black;">
+      <a href="{{ section.settings.cta_link }}" target="_blank">
+        <span>{{ section.settings.cta2_txt }}</span>
+        <svg style="margin-left:15px;" xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+          <path d="M1 1.3125L5.6875 6L1 10.6875" stroke="black" stroke-width="0.9375" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+<a href="#lead-form">
+<div class="wrapper--narrow" style="margin-bottom: 76px;">
+  {% assign form_id = 'Form-' | append: section.id %}
+  {%- form 'contact', id: form_id -%}
+      {%- comment -%}
+        Success message
+      {%- endcomment -%}
+    <input type="hidden" name="return_to" value="/pages/thank-you"/>
+      {%- if form.posted_successfully? -%}
+        <div class="contact-form__message" data-form-message>
+          <div class="wrapper">
+            <p class="note form-success">
+              Your query has been submitted, we'll get back to you within 24 hours.
+            </p>
+
+            <button type="button" class="contact-form__message__close" data-form-message-close aria-label="{{ 'general.accessibility.close_form_message' | t }}">
+              {%- render 'icon-close' -%}
+            </button>
+          </div>
+        </div>
+      {%- elsif form.errors -%}
+        <div class="contact-form__message">
+          <div class="wrapper">
+            {{- form.errors | default_errors -}}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- liquid
+        assign types = ''
+        for block in section.blocks
+          assign types = types | append: block.type
+        endfor
+      -%}
+
+      {%- unless types contains 'text' -%}
+        {%- assign name_attr = 'contact.form.name' | t | handle -%}
+        <div class="form__item"
+          {% if animations_enabled %}
+            data-aos="fade-up"
+            data-aos-anchor="{{ animation_anchor }}"
+            data-aos-delay="{{ animation_delay }}"
+            {%- assign animation_delay = animation_delay | plus: 150 -%}
+          {% endif %}>
+          <label for="{{ form_id }}-Name" class="hidden-label">{{ 'contact.form.name' | t }}</label>
+          <input type="text" id="{{ form_id }}-Name" class="input--full" name="contact[{{ name_attr }}]" placeholder="{{ 'contact.form.name' | t }}" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}" required>
+        </div>
+      {%- endunless -%}
+
+      {%- unless types contains 'email' -%}
+        <div class="form__item"
+          {% if animations_enabled %}
+            data-aos="fade-up"
+            data-aos-anchor="{{ animation_anchor }}"
+            data-aos-delay="{{ animation_delay }}"
+            {%- assign animation_delay = animation_delay | plus: 150 -%}
+          {% endif %}>
+          <label for="{{ form_id }}-Email" class="hidden-label">{{ 'contact.form.email' | t }}</label>
+          <input type="email" id="{{ form_id }}-Email" class="input--full" name="contact[{{ 'contact.form.email' | t | handle }}]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required>
+        </div>
+      {%- endunless -%}
+
+      <div class="form__item"
+          {% if animations_enabled %}
+            data-aos="fade-up"
+            data-aos-anchor="{{ animation_anchor }}"
+            data-aos-delay="{{ animation_delay }}"
+            {%- assign animation_delay = animation_delay | plus: 150 -%}
+          {% endif %}>
+          <label for="{{ form_id }}-Phone" class="hidden-label">Phone</label>
+          <input type="number" id="{{ form_id }}-Phone" class="input--full" name="contact[phone]" placeholder="Phone" required>
+        </div>
+
+      <div class="form__item"
+          {% if animations_enabled %}
+            data-aos="fade-up"
+            data-aos-anchor="{{ animation_anchor }}"
+            data-aos-delay="{{ animation_delay }}"
+            {%- assign animation_delay = animation_delay | plus: 150 -%}
+          {% endif %}>
+          <label for="{{ form_id }}-Company" class="hidden-label">Company Name</label>
+          <input type="text" id="{{ form_id }}-Company" class="input--full" name="contact[company]" placeholder="Company name" autocapitalize="words" required>
+        </div>
+
+      <div class="form__item"
+          {% if animations_enabled %}
+            data-aos="fade-up"
+            data-aos-anchor="{{ animation_anchor }}"
+            data-aos-delay="{{ animation_delay }}"
+            {%- assign animation_delay = animation_delay | plus: 150 -%}
+          {% endif %}>
+          <label for="{{ form_id }}-City" class="hidden-label">City</label>
+          <input type="text" id="{{ form_id }}-City" class="input--full" name="contact[city]" placeholder="City" autocapitalize="words" required>
+        </div>
+
+      <div class="form__item form__item--submit"
+        {% if animations_enabled %}
+          data-aos="fade-up"
+          data-aos-anchor="{{ animation_anchor }}"
+          data-aos-delay="{{ animation_delay }}"
+          {%- assign animation_delay = animation_delay | plus: 150 -%}
+        {% endif %}>
+        <button type="submit" class="btn {{ button_style }} {{ button_size }} {{ button_color }}">{{ 'contact.form.send' | t }}</button>
+      </div>
+    {%- endform -%}
+</div>
+  </a>
+
+<script>
+  var whatsappCta = document.querySelector('.whatsapp-cta')
+  $('.whatsapp-cta').hover(
+     function () {
+        $('.contact-cont .arrow').addClass('rotate');
+     }, 
+     function () {
+        $('.contact-cont .arrow').removeClass('rotate')
+     }
+  );
+</script>
+
+{% schema %}
+  {
+    "name": "Contact CTA",
+    "settings": [
+      {
+            "type": "text",
+            "id":"headline",
+            "label": "Headline",
+            "default": "Dream it, Order it, Get it"
+          },
+          {
+            "type": "html",
+            "id":"para",
+            "label": "Sub-text",
+            "default": "Your own clothing Manufacturing is just a <a class='link-txt' href='' target='_blank'>click</a> away now!"
+          },
+      {
+            "type": "text",
+            "id":"cta1_txt",
+            "label": "CTA 1 Text",
+            "default": "Contact Now +91 635 288 8483"
+          },
+      {
+            "type": "text",
+            "id":"cta2_txt",
+            "label": "CTA 2 Text",
+            "default": "Send message on WhatsApp"
+          },
+      {
+        "type":"url",
+        "id":"cta_link",
+        "label":"CTA link"
+      }
+    ],
+    "blocks":[
+      {
+        "type": "bullets",
+        "name": "Bullets",
+        "settings": [
+          {
+            "type": "text",
+            "id":"point",
+            "label": "Bullet point",
+            "default": "Personalise designs"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Contact CTA"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

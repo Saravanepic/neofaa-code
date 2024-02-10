@@ -1,0 +1,24 @@
+
+<style>
+  .thanks-cont{
+    display:flex;flex-direction:column;align-items: center;justify-content:center;margin: 170px 0;
+  }
+
+  @media screen and (max-width:500px){
+    .thanks-cont{
+      margin:100px 20px;
+    }
+    .thanks-cont img {
+      width:130px;
+    }
+  }
+</style>
+<div class="thanks-cont" style="">
+  <img src="{{ 'checkmark.svg' | asset_url }}" width='170' />
+  <h1>Thank You!</h1>
+  <h4>Your query has been submitted, we'll get back to you within 24 hours.</h4>
+</div>
+
+<script>
+fbq('track', 'Lead');
+</script>

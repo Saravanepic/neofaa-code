@@ -1,0 +1,154 @@
+<section class="custom-section">
+  <div class="wrapper">
+    <div class="custom-section-background">
+      <img class="desktop-image" src="{{ section.settings.desktop_background_image | img_url: 'master' }}" alt="Desktop Background Image" />
+      <img class="mobile-image" src="{{ section.settings.mobile_background_image | img_url: 'master' }}" alt="Mobile Background Image" />
+      <div class="custom-section-content" style="color: {{ section.settings.text_color }};">
+        <h2 style="color: {{ section.settings.title_color }};">{{ section.settings.section_title }}</h2>
+        <p>{{ section.settings.section_text }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- schema -%}
+{
+  "name": "Main Image Overlay",
+  "settings": [
+    {
+      "type": "image_picker",
+      "label": "Desktop Background Image",
+      "id": "desktop_background_image"
+    },
+    {
+      "type": "image_picker",
+      "label": "Mobile Background Image",
+      "id": "mobile_background_image"
+    },
+    {
+      "type": "text",
+      "label": "Section Title",
+      "id": "section_title"
+    },
+    {
+      "type": "textarea",
+      "label": "Section Text",
+      "id": "section_text"
+    },
+    {
+      "type": "color",
+      "label": "Title Color",
+      "id": "title_color",
+      "default": "#ffffff"  // Default to white color
+    },
+    {
+      "type": "color",
+      "label": "Text Color",
+      "id": "text_color",
+      "default": "#ffffff"  // Default to white color
+    },
+    {
+      "type": "range",
+      "label": "Desktop Font Heading Size (px)",
+      "id": "desktop_font_size_h2",
+      "default": 24,
+      "min": 12,
+      "max": 80,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "label": "Desktop Font Paragraph Size (px)",
+      "id": "desktop_font_size_p",
+      "default": 24,
+      "min": 12,
+      "max": 48,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "label": "Mobile Font Heading Size (px)",
+      "id": "mobile_font_size_h2",
+      "default": 18,
+      "min": 12,
+      "max": 36,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "label": "Mobile Font Paragraph Size (px)",
+      "id": "mobile_font_size_p",
+      "default": 18,
+      "min": 12,
+      "max": 28,
+      "step": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Image Overlay",
+      "category": "Custom"
+    }
+  ]
+}
+{%- endschema -%}
+<style>
+.custom-section {
+   position: relative;
+   overflow: hidden;
+   text-align: center;
+   color: #fff;
+   padding-block-start:80px;
+}
+  
+.custom-section-background {
+  position: relative;
+   width: 100%;
+}
+  
+.custom-section-background .desktop-image,
+.custom-section-background .mobile-image {
+   width: 100%;
+  height: auto;
+}
+
+.custom-section-content {
+    position: absolute;
+    top: 26%;
+    left: 0;
+    right: 0;
+}
+
+.custom-section-content h2 {
+   font-size: {{ section.settings.desktop_font_size_h2 }}px;
+   margin: 0;
+}
+
+.custom-section-content p {
+  font-size: {{ section.settings.desktop_font_size_p }}px;
+  margin-bottom: 20px;
+  margin: 0;
+}
+  .custom-section-background .mobile-image{
+    display: none;
+  }
+  
+@media (max-width: 767px) {
+  
+.custom-section-background .desktop-image {
+  display: none;
+}
+
+.custom-section-background .mobile-image {
+  display: block;
+}
+
+.custom-section-content h2 {
+  font-size: {{ section.settings.mobile_font_size_h2 }}px;
+}
+
+.custom-section-content p {
+  font-size: {{ section.settings.mobile_font_size_p }}px;
+}  
+}
+</style>

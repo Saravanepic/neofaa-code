@@ -1,0 +1,166 @@
+<div class="custom-text">
+  <div class="wrapper">
+    <div class="custom-text-tmd">
+      <h1>But, Why Make to order?</h1>
+      <p>The apparel industry creates a lot of trash.</p>
+      <img src="https://neofaa.com/cdn/shop/files/Main_Section_The_earth_deserves.png?v=1705846215">
+      <p class="custom-tonners"><strong>tonnes per year, </strong>
+        <span class="custom-extact">to be exact. <a href="https://neofaa.com/blogs/news/sustainable-fashion-make-to-order">learn more ></a></span>
+      </p>
+      <span>We are diverting some of it from landfills by choosing</span>
+      <p class="custom-make">{{ section.settings.order }}</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Custom Text",
+    "settings": [
+      {
+        "type":"html",
+        "id":"order",
+        "label":"Make To Order"
+      }
+    ],
+    "presets":[
+      {
+        "name":"Custom Text With Image"
+      }
+    ]
+  }
+{% endschema %}
+
+<style>
+.custom-text-tmd p.custom-make{
+  margin-top:50px;
+}
+.custom-make .make-order{
+  color:#516335;
+  font-family: 'Karla';
+  font-size:100px;
+  text-transform: capitalize;
+  font-weight:800;
+}
+.custom-make .make-order::before {
+  content: "[";
+  color:#000;
+  font-weight:400;
+}
+.custom-make .make-order::after {
+  content: "]";
+  color:#000;
+  font-weight:400;
+}
+.custom-make .brand-text{
+  color:#000;
+  font-family: 'Karla';
+  font-size:24px;
+  display: block;
+  margin: 10px 0;
+}
+.custom-text-tmd {
+    text-align: center;
+}  
+ .custom-text-tmd h1 {
+    font-family: 'Oswald';
+    font-size: 65.2px;
+    line-height: 67.2px;
+    color: #0B0B0B;
+}
+.custom-text-tmd p {
+    color: #6A4428;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Karla';
+    line-height: 28px;
+    padding-top: 15px;
+    padding-bottom: 40px;
+    margin: 0;
+}
+.custom-text-tmd img {
+    width: 100%;
+    max-width: 800px;
+    padding-top: 25px;
+}
+.custom-text-tmd p.custom-tonners {
+    color: #000;
+    font-size: 21.94px;
+    font-family: 'Karla';
+    font-weight: 700;
+    line-height: 28px;
+  padding-left: 40px;
+}  
+.custom-text-tmd span.custom-extact {
+    font-weight: 400;
+    font-size: 21.94px;
+    line-height: 28px;
+   font-family: 'Karla';
+}  
+.custom-text-tmd a {
+    color: #949494;
+    font-weight: 400;
+    font-size: 21.94px;
+    line-height: 28px;
+    text-decoration: underline;
+    line-height: 28px;
+    font-family: 'Karla';
+  font-weight: 700;
+} 
+.custom-text-tmd span {
+   font-family: 'Karla';
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 32px;
+    margin-bottom:10px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #1A4A14;
+}  
+.btn-accent {
+   background-color: #628861;
+    color: white;
+    border: none;
+    border-radius: 16.63px;
+    width: 380px;
+    font-size: 19px;
+    font-family: karla;
+}
+.Banner-Section .Flex .Image .Overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+ #landing .Desk-Overlay--template--17285905744123__banner_image_RjcKge {
+    opacity: 48% !important;
+    background: #fff;
+}  
+p.color-text3 {
+    font-size: 74.73px;
+    line-height: 59px;
+    font-weight: 700;
+    font-family: 'Karla';
+    text-transform: capitalize;
+}  
+.custom-tmd p {
+    color: #1A4A14;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 500;
+    font-family: karla;
+    text-transform: capitalize;
+}
+.custom-tmd {
+    top: -50px;
+    position: relative;
+}
+.Banner-Section .Sect-Content {
+    padding: 0;
+}
+.Flex.align-center.middle {
+    padding-top: 0px;
+}
+
+</style>

@@ -1,0 +1,113 @@
+<div class="custom-bulk">
+  <div class="bulk-background-image">
+    <img src="https://neofaa.com/cdn/shop/files/Rectangle_7.png?v=1705844840" class="custom-bg-image">
+     <div class="bulk-content">
+    <div class="wrapper">
+      <div class="order-custom">
+        <h1>Where Does This Waste Come From?</h1>
+        <p>{{ section.settings.content_imagine }}</p>
+        <p class="color-made">Made In</p>
+        <div class="bulk-image">
+          <img src="https://cdn.shopify.com/s/files/1/0605/7875/8907/files/Main_Section_The_earth_deserves_e950b2eb-8873-460e-a327-26e850c9359c.png?v=1706093968">
+        </div>
+        <p class="custom-later">{{ section.settings.custom_later }}</p>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="bottom-image">
+    <img src="https://neofaa.com/cdn/shop/files/Banner22.png?v=1705844619">
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Custom bulk Overlay",
+    "settings": [
+      {
+        "type":"html",
+        "id":"content_imagine",
+        "label":"Content Heading"
+      },
+       {
+        "type":"text",
+        "id":"custom_later",
+        "label":"Content Later"
+      }
+    ],
+    "presets":[
+      {
+        "name":"Custom bulk overlay"
+      }
+    ]
+  }
+{% endschema %}
+
+<style>
+  
+.order-custom {
+    text-align: center;
+}
+.order-custom h1 {
+    font-family: Oswald;
+    font-size: 67px;
+    font-weight: 500;
+    line-height: 67px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #6A4428;
+    margin-bottom: 0;
+}  
+p.color-weight {
+    font-family: Karla;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+p.color-made {
+    font-family: Karla;
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #6A4428;
+    margin: 34px;
+}
+p.custom-later {
+    font-family: Karla;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: center;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    padding-top: 30px;
+}  
+.custom-bulk .bulk-background-image .custom-bg-image
+  {
+    max-height: 550px;
+  }
+ .bulk-image img {
+    width: 100%;
+    max-width: 450px;
+}
+.bulk-background-image {
+    position: relative;
+    width: 100%;
+}
+.order-custom {
+    text-align: center;
+    position: absolute;
+    top: 10%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}  
+.bulk-background-image img {
+    width: 100%;
+}  
+</style>

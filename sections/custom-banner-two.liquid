@@ -1,0 +1,118 @@
+<div class="section-custom section-custom-banner banner-two {{ section.settings.classname }}"
+     {% if section.settings.image %} style="background-image:url({{ section.settings.image | image_url : master}})" {% endif %}>
+   <div class="wrapper--full-padded">
+     {% if section.settings.maintitle %}
+     <h2 class="custom_heading_four color-lightblack text-center">
+        {{- section.settings.maintitle -}}
+      </h2>
+     {% endif %}
+     
+     {% if section.settings.title %}
+       <h5 class="custom_heading_five color-lightblack text-center">
+        {{- section.settings.title -}}
+      </h5>
+     {% endif %}
+     
+     {% if section.settings.content %}
+        <div class="rte color-black text-center">
+            {{ section.settings.content  }}
+        </div>
+     {% endif %}
+    </div>
+
+      <!--  -->
+  {% if section.settings.before_image != blank %} 
+    <img src="{{ section.settings.before_image | image_url : master}}" class="img-fluid p-absolute before_image" style="top:{{ section.settings.before_image_no }}px"/>
+  {% endif %}
+  {% if section.settings.after_image != blank %} 
+    <img src="{{ section.settings.after_image | image_url : master}}" class="img-fluid p-absolute after_image" style="top:{{ section.settings.after_image_no }}px"/>
+  {% endif %}
+    <!--  -->
+  
+</div>
+
+{% schema %}
+  {
+    "name": "Custom Banner 2",
+    "settings": [
+       {
+            "type": "text",
+            "id": "classname",
+            "label": "Class Name"
+          },
+          {
+            "type": "textarea",
+            "id": "maintitle",
+            "label": "Main Title"
+          },
+          {
+            "type": "textarea",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+          "type": "text",
+          "id": "button_label",
+          "default": "Button label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Background Image"
+          },
+         {
+      "type": "header",
+      "content": "Image Options"
+    },
+      {
+          "type": "header",
+          "content": "Image Options"
+        },
+        {
+            "type": "image_picker",
+            "id": "before_image",
+            "label": "Before Image"
+          },
+       {
+                  "type": "text",
+                  "id": "before_image_no",
+                  "default": "0",
+                  "label": "Top Position - Default 0"
+           },
+        {
+            "type": "image_picker",
+            "id": "after_image",
+            "label": "After Image"
+          },
+       {
+                  "type": "text",
+                  "id": "after_image_no",
+                  "default": "0",
+                  "label": "Top Position - Default 0"
+           }
+      
+    ],
+    "presets": [
+    {
+      "name": "Custom Banner 2"
+    }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

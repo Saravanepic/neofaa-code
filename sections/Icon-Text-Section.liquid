@@ -1,0 +1,302 @@
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+            
+            <div class="Icon-Text-Section color-bg--{{ section.settings.color-scheme }} section-{{ section.id }}-padding">
+
+              <div class="Banner-Box {% if section.settings.show-container %} wrapper {% endif %}">
+
+                      <div class="Sect-Content {% if section.settings.rg %} Remove-Padding {% endif %}">
+                      {% if section.settings.s-title !=blank %}
+                          <div class="Heading Colored-Heading {{ section.settings.t-align2 }}">
+                                <h2 class="section-title title {{ section.settings.t-size }}">{{ section.settings.s-title }}</h2>
+                          </div>
+                      {% endif %}  
+                
+                      {% if section.settings.s-info !=blank %}
+                        <div class="Section-Info Colored-Info {{ section.settings.t-align2 }}">
+                          {{ section.settings.s-info }}
+                        </div>
+                      {% endif %}  
+                      </div>          
+              
+                <div class="Flex">
+                  {% for block in section.blocks %}
+                    {% case block.type %}
+                      {% when 'Icon3' %}
+
+                       <div class="Icon-Boxed color-bg--{{ block.settings.color-scheme }} desk--{{ block.settings.width3 }} mobile--{{ block.settings.width4 }}">
+                          <div class="Flex-Box {{ block.settings.f-align }} {{ block.settings.j-align }} {{ block.settings.t-align }}">
+
+                            {% if block.settings.img !=blank %}
+                              <div class="Image">
+                                <img src="{{ block.settings.img | img_url:'master' }}"">
+                              </div>
+                            {% endif %}  
+                            
+                            {% if block.settings.svg !=blank %}
+                              <div class="Image">
+                                {{ block.settings.svg }}
+                              </div>
+                            {% endif %}  
+
+                            <div class="Info">
+
+                              {% if block.settings.title !=blank %}
+                                <div class="Title">
+                                   <h4>{{ block.settings.title }}</h4> 
+                                </div>
+                              {% endif %}  
+  
+                              {% if block.settings.info !=blank %}
+                                <div class="Description">
+                                  {{ block.settings.info }}
+                                </div>
+                              {% endif %}  
+
+                            </div>
+                          </div>
+                       </div>
+                  
+                    {% endcase %}
+                  {% endfor %}  
+                </div>
+              </div>
+            </div>
+
+
+{% schema %}
+  {
+    "name": "Icon-Text-Section",
+    "class":"Shopify-Icon-Text",
+    "settings": [
+
+
+      {
+        "type": "select",
+        "id": "color-scheme",
+        "options": [
+          { "value": "white", "label": "White"},
+          { "value": "dark", "label": "Dark"},
+          { "value": "accent", "label": "Accent"},
+          { "value": "transparent", "label": "Transparent"},
+          { "value": "accent3", "label": "Accent3"}
+        ],
+             "label": "Section Color Scheme"
+      },
+      {
+        "type": "checkbox",
+        "id": "show-container",
+        "label": "Show Container",
+        "default": false
+      },
+
+      {
+        "type": "checkbox",
+        "id": "rg",
+        "label": "Remove Padding",
+        "default": false,
+        "info":"If Section Title Or Info is blank thene check this checkbox to remove unnecessary padding From Section Title"
+      },
+
+      {
+        "type": "select",
+        "id": "t-align2",
+        "options": [
+          { "value": "text-center", "label": "Text-Center"},
+          { "value": "text-left", "label": "Text-Left"},
+          { "value": "text-right", "label": "Text-Right"}
+        ],
+        "label": "Section Title Alignment",
+		"default":"text-center"
+      },      
+      {
+		"type": "html",
+		"id": "s-title",
+		"default": "<p>By choosing Make to order, We take a step against unnecessary textile waste.Which Helps to save the planet.</p>",
+		"label": "Section Colored Heading"
+	  },
+      {
+		"type": "richtext",
+		"id": "s-info",
+		"default": "<p>you're stopping those extra outfits from becoming trash. It's like giving a second chance to clothes and saving the Earth's resources at the same time.</p>",
+		"label": "Section Colored Info"
+	  }, 
+      {
+        "type": "select",
+        "id": "t-size",
+        "options": [
+          {
+            "value": "h3",
+            "label": "Small"
+          },
+          {
+            "value": "h2",
+            "label": "Medium"
+          },
+          {
+            "value": "h1",
+            "label": "Large"
+          },
+          {
+            "value": "h0",
+            "label": "Extra Large"
+          }
+        ],
+        "default": "h2",
+        "label": "Title Font Size"
+      },
+
+      {
+          "type": "range",
+          "id": "padding_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Section Top Padding",
+          "default": 36
+      },
+      {
+          "type": "range",
+          "id": "padding_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Section Bottom Padding",
+          "default": 36
+      } 
+      
+      
+    ],
+
+
+	"blocks": [
+      {
+        "type": "Icon3",
+        "name": "Simple Icon Text Grid",
+        "settings": [
+
+
+            {
+              "type": "select",
+              "id": "color-scheme",
+              "options": [
+                { "value": "white", "label": "White"},
+                { "value": "dark", "label": "Dark"},
+                { "value": "accent", "label": "Accent"},
+                { "value": "transparent", "label": "Transparent"},
+                { "value": "accent2", "label": "Accent2"},
+                { "value": "accent3", "label": "Accent3"}
+              ],
+                   "label": "Simple Icon Text Grid Color Scheme"
+            },            
+			{
+				 "type": "select",
+				 "id": "width3",
+				 "options": [
+					{ "value": "27", "label": "27%"}, 
+					{ "value": "24", "label": "Four In A Row"},
+					{ "value": "32", "label": "Thre In A Row"},
+					{ "value": "49", "label": "Two In A Row"},
+					{ "value": "100", "label": "One In A Row"}
+				 ],
+				 "label": "Desktop Simple Icon Text Grid Width",
+				 "default":"32"
+			},
+			{
+				 "type": "select",
+				 "id": "width4",
+				 "options": [
+					{ "value": "27", "label": "27%"}, 
+					{ "value": "24", "label": "Four In A Row"},
+					{ "value": "32", "label": "Thre In A Row"},
+					{ "value": "49", "label": "Two In A Row"},
+					{ "value": "100", "label": "One In A Row"}
+				 ],
+				 "label": "Mobile Simple Icon Text Grid Width",
+				 "default":"100"
+			},			
+			{
+				"type": "select",
+				"id": "f-align",
+				"options": [
+				  { "value": "align-start", "label": "Align-Start"},
+				  { "value": "align-center", "label": "Align-Center"},
+				  { "value": "align-end", "label": "Align-End"}
+				],
+				  "label": "Simple Icon Text Grid Vertical Alignment"
+			},        
+			{
+				"type": "select",
+				"id": "j-align",
+				"options": [
+				  { "value": "start", "label": "Start"},
+				  { "value": "middle", "label": "Middle"},
+				  { "value": "end", "label": "End"}
+				],
+				"label": "Simple Icon Text Grid Horizontal Alignment"
+			},
+			{
+				 "type": "select",
+				 "id": "t-align",
+				 "options": [
+					{ "value": "text-center", "label": "Text-Center"},
+					{ "value": "text-left", "label": "Text-Left"},
+					{ "value": "text-right", "label": "Text-Right"}
+				 ],
+				 "label": "Simple Icon Text Grid Text Alignment",
+				 "default":"text-left"
+			},          
+			{
+			  "id": "img",
+			  "type": "image_picker",
+			  "label": "Icon Image",
+			  "info": "Use images in (Jpg,Png Format)"
+			},
+			{
+				"type": "html",
+				"id": "svg",
+				"default": "<p>Write Svg Icon Code Here</p>",
+				"label": "Svg Icon Code Box"
+			},			
+			{
+				"type": "text",
+				"id": "title",
+				"default": "Icon Text Title",
+				"label": "Simple Icon Text Heading"
+			},
+			{
+				"type": "richtext",
+				"id": "info",
+				"default": "<p>Simple Icon Text Description</p>",
+				"label": "Simple Icon Text Info"
+			}
+
+        ]
+      }
+	
+
+	  
+    ],	    
+
+	"presets": [
+		{
+		  "name": "Icon-Text-Section"
+		}
+	]
+    
+  }
+{% endschema %}

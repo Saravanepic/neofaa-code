@@ -1,0 +1,142 @@
+<style>
+  .feature-cont{
+    position:relative;
+    background:white;
+    cursor:pointer;
+    padding:30px;padding-top:65px;
+    transition: 0.3s linear;
+    width: 325px;
+    height: 244px;
+  }
+  .backcard{
+    position:absolute;
+    width:100%;
+    height:0;
+    background:#F1EFE8;
+    bottom:0;left:0;
+    transition: 0.3s linear;
+    z-index:2;
+  }
+  .hexa-img-cont{
+    position:absolute;
+    left:50%;
+    transform:translate(-50%,0);
+    top:-40%;
+  }
+  .feature-cont:hover .backcard{
+    height: 5px;
+  }
+  .feature-cont:hover{
+    box-shadow: 5px 5px 15px #d1d1d1;
+  }
+  .feature-cont .bg-fill, .feature-cont .bg-fill polygon{
+    transition: 0.3s linear;
+  }
+  .feature-cont:hover .bg-fill{
+    transform: scale(4.5);
+  }
+  .feature-cont:hover .bg-fill polygon{
+    fill: rgb(255 252 248);
+  }
+  .feature-main-cont{
+    padding: 30px 120px;
+  }
+</style>
+<style>
+  @media screen and (max-width:500px){
+    .feature-main-cont{
+      padding: 30px;
+    }
+  }
+</style>
+<div class="feature-main-cont" style="background:#F1EFE8;text-align:center;">
+  <h1 class="headline-2">{{ section.settings.headline }}</h1>
+  <p class="para-2" style="font-size: 15px;">{{ section.settings.para }}</p>
+  <div style="display: flex;margin-top:160px;flex-wrap: wrap;column-gap: 75px;row-gap: 142px;justify-content: center;">
+    {% for block in section.blocks %}
+      <div style="" class="feature-cont">
+        <div class="hexa-img-cont" style="z-index: 2;">
+          <svg style="width: 152px;" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="img-{{ block.id }}" patternUnits="userSpaceOnUse" width="100" height="100">
+                <image xlink:href="{% if block.settings.img != null %} {{ block.settings.img | img_url:'400x400', crop: 'center' }} {% else %}https://placehold.co/500x500{% endif %}" x="-25" width="150" height="100" />
+              </pattern>
+            </defs>
+            <polygon points="50 1 95 25 95 75 50 99 5 75 5 25" fill="url(#img-{{ block.id }})"/>
+          </svg>
+        </div>
+        <div style="z-index: 2;position:relative;">
+          <div style="letter-spacing: 5.32px;font-weight:700;">CHOOSE</div>
+          <div class="headline-2" style="font-size: 40px;line-height: 30px;font-weight: 300;">{{ block.settings.headline }}</div>
+          <div style="margin-top:10px;font-size: 15px;">{{ block.settings.para }}</div>
+        </div>
+              
+        <div style="z-index: 1;position:absolute;left:0;top:0;overflow:hidden;width:100%;height:100%;">
+          <div class="hexa-img-cont" style="">
+            <svg class="bg-fill" style="width: 152px;" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="50 1 95 25 95 75 50 99 5 75 5 25" fill="rgb(241 239 236)"/>
+            </svg>
+          </div>
+        </div>
+  
+        <div class="backcard"></div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Features Grid",
+    "settings": [
+      {
+            "type": "text",
+            "id":"headline",
+            "label": "Headline",
+            "default": "You Choose, We Make"
+          },
+          {
+            "type": "text",
+            "id":"para",
+            "label": "Sub-text",
+            "default": "Get outfits of Your imagination without worrying about the supply chain."
+          }
+    ],
+    "blocks":[
+      {
+        "type": "feature",
+        "name": "Feature",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "img",
+            "label": "Image"
+          },
+          {
+            "type": "html",
+            "id":"headline",
+            "label": "Headline",
+            "default": "ANY <span style='font-weight: 600;'>FABRIC</span>"
+          },
+          {
+            "type": "html",
+            "id":"para",
+            "label": "Sub-text",
+            "default": "Choose from 1000+ Fabric<br>materials to make Outfits from."
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Features Grid"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

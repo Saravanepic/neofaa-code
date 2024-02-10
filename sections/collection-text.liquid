@@ -1,0 +1,54 @@
+<style>
+  .moretext {
+    display: none;
+  }
+</style>
+{% if section.settings.txt != blank %}
+  
+<div class="wrapper--full-padded">
+  {% assign paras2 = section.settings.txt | strip_html | split:"--" %}
+  {% for para in paras2 %}
+    <p {% if forloop.index > 2 %} class="moretext" {% endif %} {% if para contains '**' %} style="font-weight:bold;{% if forloop.index == 1 %}font-size:20px;{% endif %}" {% endif %}>
+      {{ para | replace:'**', '' }}
+    </p>
+  {% endfor %}
+  <a class="moreless-button" href="#" style="font-weight:bold;">Read more</a>
+</div>
+
+
+<script>
+  $('.moreless-button').click(function() {
+    $('.moretext').slideToggle();
+    if ($('.moreless-button').text() == "Read more") {
+      $(this).text("Read less")
+    } else {
+      $(this).text("Read more")
+    }
+  });
+</script>
+
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Collection Text",
+    "settings": [
+      {
+        "type": "richtext",
+        "id":"txt",
+        "label":"Text"
+      }
+    ],
+    "presets":[
+      {
+        "name": "Collection Text"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

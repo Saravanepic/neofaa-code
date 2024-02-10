@@ -1,0 +1,373 @@
+<div class="make-order-container">
+    <div class="wrapper">
+        <div class="make_main_title_sec">
+          <h2 class="make_main_title_sec_title">Wait, What is Make to order?</h2>
+          <h6 class="make_main_title_sec_sub_title">It is custom-made outfits made just for you, crafted when you dream of<br> them and delivered according to your exact needs.</h6>
+        </div>
+        <div class="make-order-sub">
+            <div class="make-order-left-aria">
+                <div class="left-aria--content">
+                    <img src="{{ section.settings.left_aria_image | img_url: 'master'  }}" alt="left image">
+                    <p class="left-aria--content-para-one">{{ section.settings.left_aria_title }}</p>
+                    <p class="left-aria--content-para-two">{{ section.settings.left_aria_content }}</p>
+                </div>
+            </div>
+
+            <div class="make-order-right-aria">
+
+    <div class="make-order-right-aria_top">
+        <div class="right-aria--content">
+            <img src="{{ section.settings.right_aria_image_one | img_url: 'master'  }}" alt="Right Image One">
+            <p class="right-aria--content-para-one">{{ section.settings.right_aria_title_one }}</p>
+            <span class="steps-right-aria">step 1</span>
+        </div>
+        <div class="right-aria--content">
+            <img src="{{ section.settings.right_aria_image_two | img_url: 'master'  }}" alt="Right Image Two">
+            <p class="right-aria--content-para-one">{{ section.settings.right_aria_title_two }}</p>
+            <span class="steps-right-aria">step 2</span>
+        </div>
+        <div class="right-aria--content">
+            <img src="{{ section.settings.right_aria_image_three | img_url: 'master'  }}" alt="Right Image Three">
+            <p class="right-aria--content-para-one">{{ section.settings.right_aria_title_three }}</p>
+            <span class="steps-right-aria">step 3</span>
+        </div>
+    </div>
+
+    <div class="make-order-right-aria_bottom">
+        <div class="right-aria--content">
+            <img src="{{ section.settings.right_aria_image_four | img_url: 'master'  }}" alt="Right Image Four">
+            <p class="right-aria--content-para-one">{{ section.settings.right_aria_title_four }}</p>
+            <span class="steps-right-aria">step 4</span>
+        </div>
+        <div class="right-aria--content">
+            <img src="{{ section.settings.right_aria_image_five | img_url: 'master'  }}" alt="Right Image Five">
+            <p class="right-aria--content-para-one">{{ section.settings.right_aria_title_five }}</p>
+            <span class="steps-right-aria">step 5</span>
+        </div>
+    </div>
+    
+</div>
+
+            </div>
+            <div class="make_main_bottom_heading">
+              <h1 class="make_main_bottom_heading_title">Make to Order</h1>
+            </div>
+    </div>
+</div>
+
+{%- schema -%}
+{
+  "name": "Make The Order",
+  "settings": [
+    {
+      "type": "image_picker",
+      "label": "Left Image",
+      "id": "left_aria_image"
+      },
+      {
+      "type": "richtext",
+      "label": "Left Image Title",
+      "id": "left_aria_title"
+    },
+    {
+      "type": "richtext",
+      "label": "Left Image Text",
+      "id": "left_aria_content"
+    },   
+    {
+      "type": "image_picker",
+      "label": "Right Image 1",
+      "id": "right_aria_image_one"
+      },
+      {
+      "type": "richtext",
+      "label": "Right Image Title 1",
+      "id": "right_aria_title_one"
+    },
+    {
+      "type": "image_picker",
+      "label": "Right Image 2",
+      "id": "right_aria_image_two"
+      },
+      {
+      "type": "richtext",
+      "label": "Right Image Title 2",
+      "id": "right_aria_title_two"
+    },
+    {
+      "type": "image_picker",
+      "label": "Right Image 3",
+      "id": "right_aria_image_three"
+      },
+      {
+      "type": "richtext",
+      "label": "Right Image Title 3",
+      "id": "right_aria_title_three"
+    },
+    {
+      "type": "image_picker",
+      "label": "Right Image 4",
+      "id": "right_aria_image_four"
+      },
+      {
+      "type": "richtext",
+      "label": "Right Image Title 4",
+      "id": "right_aria_title_four"
+    },
+    {
+      "type": "image_picker",
+      "label": "Left Image 5",
+      "id": "right_aria_image_five"
+      },
+      {
+      "type": "richtext",
+      "label": "Left Image Title 5",
+      "id": "right_aria_title_five"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Make The Order",
+      "category": "Custom"
+    }
+  ]
+}
+{%- endschema -%}
+
+<style>
+.make-order-container {
+    position: relative;
+    width: 100%;
+    background-color: #F1EFE8;
+}
+.make_main_title_sec {
+    width: 100%;
+    text-align: center;
+    padding-top: 60px;
+}
+.make_main_title_sec .make_main_title_sec_title {
+    color: #0B0B0B;
+    text-align: center;
+    font-family: Oswald;
+    font-size: 60.756px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 53.756px;
+}
+.make_main_title_sec .make_main_title_sec_sub_title {
+    color: #1A4A14;
+    text-align: center;
+    font-family: Karla;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 33.09px;
+}  
+.make-order-sub {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 100px;
+}
+.make-order-left-aria {
+    width: 20%;
+}
+.left-aria--content {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 34.23px;
+    background: #FFF;
+    box-shadow: 0px 11.075px 24.919px 0px rgba(0, 0, 0, 0.12);
+    padding: 16px 0;
+}
+  .left-aria--content img {
+    width: 50px;
+    height: 50px;
+}
+.left-aria--content h6 {
+    color: #1A4A13;
+    font-family: Montserrat;
+    font-size: 14.961px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 94.8%;
+    text-transform: uppercase;
+}
+.left-aria--content p {
+    color: #1A4A13;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 10.734px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 116.8%;
+    text-transform: uppercase;
+}  
+.make-order-right-aria {
+    width: 80%;
+}
+.make-order-right-aria_top {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}  
+.make-order-right-aria_bottom {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6rem;
+}  
+.right-aria--content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4.115px;
+    flex-shrink: 0;
+    border-radius: 34.23px;
+    background: #FFF;
+    box-shadow: 0px 11.075px 24.919px 0px rgba(0, 0, 0, 0.12);
+    min-height: 86px;
+   padding: 15px 32px;
+    margin: 15px 0;
+} 
+.right-aria--content img {
+    width: 40px;
+    height: 40px;
+}
+.right-aria--content p {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 12.995px;
+    font-style: normal;
+    line-height: 107.8%;
+    letter-spacing: 0.68px;
+    text-transform: uppercase;
+}
+.right-aria--content .steps-right-aria {
+    position: absolute;
+    bottom: -9px;
+    color: #fff;
+    padding: 1px 9px;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 37.653px;
+    border: 0.775px solid #B5B5B5;
+    background: #193814;
+    box-shadow: 0px 9.3px 20.925px 0px rgba(0, 0, 0, 0.12);
+}
+.make_main_bottom_heading {
+    width: 100%;
+    text-align: center;
+}
+.make_main_bottom_heading .make_main_bottom_heading_title {
+    color: #FFF;
+    text-align: center;
+    font-family: Oswald;
+    font-size: 197px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 84px;
+    text-transform: capitalize;
+    margin: 0;
+}  
+
+@media (max-width: 767px) {  
+.make_main_title_sec {
+  padding-top: 40px;
+}  
+.make_main_title_sec .make_main_title_sec_title {
+    font-size: 30px;
+    line-height: 42px;
+}
+.make_main_title_sec .make_main_title_sec_sub_title {
+    font-size: 16px;
+    line-height: 28px;
+}  
+.make-order-sub {   
+  flex-wrap: wrap;
+  padding-bottom: 70px;
+}  
+.make-order-left-aria {
+    width: 100%;
+}
+.make-order-right-aria {
+    width: 100%;
+} 
+.make-order-right-aria_top {
+    flex-wrap: wrap;
+}  
+.right-aria--content {
+    gap: 10.115px;
+    padding: 0px 30px;
+    width: 100%;
+}  
+.make-order-right-aria_bottom {
+    gap: 0rem;
+    flex-wrap: wrap;
+}  
+.make_main_bottom_heading .make_main_bottom_heading_title {   
+font-size: 50px;   
+line-height: 28px;
+}  
+}
+@media only screen and (max-width: 1220px) and (min-width: 768px){
+  .make_main_title_sec {
+  padding-top: 50px;
+}  
+.make_main_title_sec .make_main_title_sec_title {
+    font-size: 56px;
+    line-height: 52.756px;
+}
+.make_main_title_sec .make_main_title_sec_sub_title {
+    font-size: 22px;
+    line-height: 32px
+}  
+.make-order-sub {   
+  flex-wrap: wrap;
+  padding-bottom: 100px;
+}  
+.make-order-left-aria {
+    width: 100%;
+}
+.make-order-right-aria {
+    width: 100%;
+} 
+.make-order-right-aria_top {
+   flex-wrap: wrap;
+   margin-top: 24px;
+}  
+.right-aria--content {
+    gap: 10.115px;
+    padding: 0px 30px;
+    width: 44%;
+    margin: 15px 9px;
+}  
+.make-order-right-aria_bottom {
+    gap: 0rem;
+    flex-wrap: wrap;
+}  
+.make_main_bottom_heading .make_main_bottom_heading_title {   
+    font-size: 100px;
+    line-height: 46px;
+}  
+  }
+@media only screen and (max-width: 1360px) and (min-width: 1221px){
+  .make_main_title_sec .make_main_title_sec_sub_title {
+    font-size: 24.105px;
+}
+.right-aria--content {
+    padding: 0px 29px;
+}
+.make_main_bottom_heading .make_main_bottom_heading_title { 
+  font-size: 124px;
+  line-height: 64px;
+}
+}  
+</style>

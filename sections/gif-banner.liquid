@@ -1,0 +1,106 @@
+<div class="section-custom section-custom-gif-banner {{ section.settings.classname }}" 
+    style="background-color:{{ section.settings.color_title }};">
+   <div class="wrapper--full-padded">
+     <div class="section-row">
+
+     <div class="content_wrapper {% if section.settings.image == blank %} gap_none {% endif %}">
+         {% if section.settings.title %}
+           <h5 class="custom_heading_two color-white text-center">
+            {{- section.settings.title -}}
+          </h5>
+         {% endif %}
+     
+     </div>
+       {% if section.settings.image != blank %} 
+       
+         <div class="image_wrapper">
+           <a href="https://neofaa.com/" target="_self">
+        <img src="{{ section.settings.image | image_url : master}}" class="img-fluid"/>
+             </a>
+       </div>    
+       
+     
+         {% endif %}
+
+
+       
+    </div>
+  </div>
+
+     <!--  -->
+  {% if section.settings.before_image != blank %} 
+    <img src="{{ section.settings.before_image | image_url : master}}" class="img-fluid p-absolute before_image" style="top:{{ section.settings.before_image_no }}px"/>
+  {% endif %}
+  {% if section.settings.after_image != blank %} 
+    <img src="{{ section.settings.after_image | image_url : master}}" class="img-fluid p-absolute after_image" style="bottom:{{ section.settings.after_image_no }}px"/>
+  {% endif %}
+    <!--  -->
+  
+</div>
+  
+{% schema %}
+  {
+    "name": "GIF Banner",
+    "settings": [
+       {
+            "type": "text",
+            "id": "classname",
+            "label": "Class Name"
+          },
+             {
+          "type": "color",
+          "id": "color_title",
+          "label": "Background color",
+          "default": "#FFF"
+        },
+          {
+            "type": "textarea",
+            "id": "title",
+            "label": "Title"
+          },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "GIF Image"
+          },
+         {
+          "type": "header",
+          "content": "Image Options"
+        },
+        {
+            "type": "image_picker",
+            "id": "before_image",
+            "label": "Before Image"
+          },
+       {
+                  "type": "text",
+                  "id": "before_image_no",
+                  "default": "0",
+                  "label": "Top Position - Default 0"
+           },
+        {
+            "type": "image_picker",
+            "id": "after_image",
+            "label": "After Image"
+          },
+       {
+                  "type": "text",
+                  "id": "after_image_no",
+                  "default": "0",
+                  "label": "Bottom Position - Default 0"
+           }
+      
+    ],
+    "presets": [
+      {
+        "name": "GIF Banner"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

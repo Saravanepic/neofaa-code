@@ -1,0 +1,248 @@
+{% assign progress_bar_color = settings.shipping_bar_color %}
+
+<div class="upsell-container cart__message">{% comment %}
+  {% assign shipping_value = settings.minimum_free_shipping | times: 100 %}
+  {% assign cart_total = cart.total_price %}
+  {% assign shipping_value_left = shipping_value | minus: cart_total %}
+  {% assign shipping_percentage_fraction = cart_total | times: 100 | divided_by: shipping_value %}
+  <p class="shipping-message">
+    {% if shipping_value_left > 0 %}
+      <span class="free_shipping_notice">You are {{ shipping_value_left | money }} away from free shipping!</span>
+    {% elsif  shipping_value_left <= 0 %}
+      <span>You have free shipping !!!</span>
+    {% endif %}
+  </p>
+  {% assign new_shipping_percentage_fraction = shipping_percentage_fraction | minus: 95 %}
+  {% endcomment %}
+
+  {% assign shipping_value = settings.minimum_free_shipping | times: 100 %}
+  {% assign cart_total = cart.total_price %}
+  {% assign shipping_value_left = shipping_value | minus: cart_total %}
+  
+  {% assign tier_value_1 = settings.minimum_tear1_value | times: 100 %}
+  {% assign tier_value_1_left = tier_value_1 | minus: cart_total %}
+  
+
+  {% assign tier_value_2 = settings.minimum_tear2_value | times: 100 %}
+  {% assign tier_value_2_left = tier_value_2 | minus: cart_total %}
+  
+
+  {% assign tier_value_3 = settings.minimum_tear3_value | times: 100 %}
+  {% assign tier_value_3_left = tier_value_3 | minus: cart_total %}
+  
+  
+  <p class="shipping-message" style="margin:0 0 3px 0;">
+
+    {% assign shipping_percentage_fraction = cart_total | times: 100 | divided_by: shipping_value %}
+     {% if settings.custom_shipping_on %}
+    {% if shipping_value_left > 0 %}
+      <span class="free_shipping_notice">Add {{ shipping_value_left | money }} to unlock Free Shipping</span>    
+    {% endif %}
+    {% endif %}
+    
+    {% if settings.custom_tiar1_on %}
+    {% if shipping_value <= cart_total %}   
+      {% assign tier_value_1_fraction = cart_total | times: 100 | divided_by: tier_value_1 %}
+      {% if tier_value_1_left > 0 %}
+        <span class="free_shipping_notice">Add {{ tier_value_1_left | money }} to unlock 10% OFF</span>
+      {% endif %}
+    {% endif %}
+    {% endif %}
+
+    {% if settings.custom_tiar2_on %}  
+      {% if tier_value_1 <= cart_total %}
+        {% assign tier_value_2_percentage_fraction = cart_total | times: 100 | divided_by: tier_value_2 %}
+        {% if tier_value_2_left > 0 %}
+          <span class="free_shipping_notice">Add {{ tier_value_2_left | money }} to unlock 20% OFF</span>
+        {% endif %}
+     {% endif %}
+   {% endif %}
+
+    {% if settings.custom_tiar3_on %}
+    {% if tier_value_2 <= cart_total %}
+      {% assign tier_value_3_percentage_fraction = cart_total | times: 100 | divided_by: tier_value_3 %}
+      {% if tier_value_3_left > 0 %}
+        <span class="free_shipping_notice">Add {{ tier_value_3_left | money }} to unlock 25% OFF</span>
+      {% endif %}
+    {% endif %}
+    {% endif %} 
+  </p>
+  
+  <div class="custom_bar-bottom">
+    {% if settings.custom_shipping_on %}
+  <div class="progress-bar tmd_1">
+    <div class="progress-bar-done tmd_1" data-progress="loading"></div>    
+  </div>
+    {% endif %}
+  {% if settings.custom_tiar1_on %}  
+  <div class="progress-bar tmd_2">
+    <div class="progress-bar-done tmd_2" data-progress="loading"></div>    
+  </div>
+  {% endif %}
+    {% if settings.custom_tiar2_on %}
+  <div class="progress-bar tmd_3">
+    <div class="progress-bar-done tmd_3" data-progress="loading"></div>    
+  </div>
+  {% endif %}
+    {% if settings.custom_tiar3_on %}
+  <div class="progress-bar tmd_4">
+    <div class="progress-bar-done tmd_4" data-progress="loading"></div>    
+  </div>
+      {% endif %}
+</div>
+  <div class="offers">
+   
+      <div class="tiar_1">0%</div>
+    {% if settings.custom_shipping_on %}
+      <div class="tiar_2">Free<br>Shipping</div>
+    {% endif %}
+    {% if settings.custom_tiar1_on %}
+      <div class="tiar_3">{{ settings.minimum_tear1_off }}%</div>
+     {% endif %}
+    {% if settings.custom_tiar2_on %}
+      <div class="tiar_4">{{ settings.minimum_tear2_off }}%</div>
+     {% endif %}
+    {% if settings.custom_tiar3_on %}
+      <div class="tiar_5">{{ settings.minimum_tear3_off }}%</div>
+     {% endif %}
+  </div>
+
+</div>
+<style>
+  .upsell-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+
+  .progress-bar{
+    background-color: #E2E4E3;
+    display: flex;
+    height: 0.8em;
+    width: 100%;
+    /* border-radius: 0.75em; */
+    border-radius: 0;
+    margin: 0;
+    padding: 1px 0;
+    position: relative;
+    align-items: center;
+  }
+  
+  .progress-bar-done{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ progress_bar_color }};
+    background-image: repeating-linear-gradient(
+      to left,
+      {{ progress_bar_color }},
+      {{ progress_bar_color | color_lighten: 10 }},
+      {{ progress_bar_color | color_lighten: 20 }}
+    );
+
+    box-shadow: 0 5px 5px -6px {{ progress_bar_color }};
+
+    /*border-radius: 0.75em;*/
+    height: 100%;
+    transition: 1s ease 0.3s;
+    max-width: 100%;
+    /* width: {{ shipping_percentage_fraction }}%; */
+  }
+
+  .progress-bar-done.tmd_1{    
+    width: {{ shipping_percentage_fraction }}%;
+    z-index: 999;
+  }
+  .progress-bar-done.tmd_2{
+     width: {{ tier_value_1_fraction }}%;
+    
+  }
+  .progress-bar-done.tmd_3{
+    width: {{ tier_value_2_percentage_fraction }}%;
+  }
+  .progress-bar-done.tmd_4{
+    width: {{ tier_value_3_percentage_fraction }}%;
+  }
+
+
+  
+  .free-shipping-icon{
+    position: absolute;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    /* border-radius: 20px; */
+    background-color: #E2E4E3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .progress-bar::before {
+    content: ' ';
+    position: absolute;
+    left: 0px;
+    bottom: -10px;
+    border-left: 3px solid #E2E4E3;
+    height: 10px;
+  }
+  .progress-bar::after {
+    content: ' ';
+    position: absolute;
+    right: 0px;
+    bottom: -10px;
+    height: 11px;
+    border-right: 3px solid #E2E4E3;    
+}
+  /* .progress-bar.tmd_1::before {
+    left: 2px;
+    bottom: -7px;
+    height: 13px;
+    
+  }
+  .progress-bar.tmd_4::after {
+    height: 11px;
+    border-right: 3px solid #E2E4E3;
+    
+} */
+  .iconicion{
+    box-shadow: 0 0 10px rgba(62, 101, 207, 0.5);
+    border: 1px solid black;
+    transition: 1s ease 0.7s;
+  }
+
+.offers {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 7px;
+}
+.custom_bar-bottom {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+  .cart-drawer__foot.cart__foot .upsell-container.cart__message {
+    display: none;
+}
+ /* .custom_bar-bottom .progress-bar.tmd_1,
+ .custom_bar-bottom .progress-bar-done.tmd_1{
+    border-top-left-radius: 0.75em;
+    border-bottom-left-radius: 0.75em;
+}
+ .custom_bar-bottom .progress-bar.tmd_4,
+  .custom_bar-bottom .progress-bar-done.tmd_4{
+    border-top-right-radius: 0.75em;
+    border-bottom-right-radius: 0.75em;
+} */
+ .offers .tiar_2 {
+    text-align: center;
+    font-size: 9px;
+    padding-right: 8px;
+}
+</style>
